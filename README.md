@@ -1,2 +1,2 @@
-# vm-dev
-Developement environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
+# Developer's VM
+Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
