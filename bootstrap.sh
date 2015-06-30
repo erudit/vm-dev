@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
-yum update
-yum -y install vim nano 
+SHARED_DIR=$1
 
+if [ -f "$SHARED_DIR/config" ]; then
+  . $SHARED_DIR/config
+fi
+
+
+yum update
+yum -y install vim nano git
+yum -y groupinstall 'Development Tools'

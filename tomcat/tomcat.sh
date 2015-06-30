@@ -18,3 +18,5 @@ if ! grep -q "role rolename=\"fedoraAdmin\"" /etc/tomcat/tomcat-users.xml ; then
 fi
 
 
+#starting tomcat
+systemctl start tomcat

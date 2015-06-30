@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Contain Environment variables for installs
+#
+
+HOME_DIR="/home/vagrant"
+
+SHARED_DIR="/vagrant"
+
+DOWNLOAD_DIR="$SHARED_DIR/downloads"
+if [ ! -d $DOWNLOAD_DIR ]; then
+  mkdir $DOWNLOAD_DIR
+fi
+
+#FEDORA_VERSION=4.2.0
+#FEDORA_TAG=4.2.0
+# true to enable auth, false to disable it
+#FEDORA_AUTH=false
+#FEDORA_AUDIT=true
+#FEDORA_AUDIT_LOCATION=/audit
+
+SOLR_VERSION=4.10.3
+SOLR_HOME=/var/lib/tomcat/solr

@@ -13,9 +13,18 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "chef/centos-7.0"
-  config.vm.provision :shell, path: "bootstrap.sh", path: "tomcat.sh", path: "apache.sh"
+
+
+  shared_dir = "/vagrant"
+
+  config.vm.provision :shell, path: "bootstrap.sh", args: shared_dir
+  config.vm.provision :shell, path: "apache/apache.sh", args: shared_dir
+  config.vm.provision :shell, path: "tomcat/tomcat.sh", args: shared_dir
+  config.vm.provision :shell, path: "solr/solr.sh", args: shared_dir
   config.vm.network :forwarded_port, host: 4567, guest: 80
   config.vm.network :forwarded_port, host: 8080, guest: 8080 
+
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
