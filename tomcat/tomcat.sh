@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Installing Tomcat"
+
 yum -y install tomcat tomcat-webapps tomcat-admin-webapps apache-tomcat-apis
 
 #vagrant user
@@ -19,3 +21,5 @@ fi
 
 #starting tomcat
 systemctl start tomcat
+
+echo "Tomcat Installed"

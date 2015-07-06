@@ -9,11 +9,14 @@ if [ ! -d $SOLR_HOME ]; then
   mkdir $SOLR_HOME
 fi
 
+echo "Installing Solr"
+
 if [ ! -f "$DOWNLOAD_DIR/solr-$SOLR_VERSION.tgz" ]; then
   echo -n "Downloading Solr..."
   wget -q -O "$DOWNLOAD_DIR/solr-$SOLR_VERSION.tgz" "http://archive.apache.org/dist/lucene/solr/$SOLR_VERSION/solr-$SOLR_VERSION.tgz"
   echo " done"
 fi
+
 
 cd /tmp
 cp "$DOWNLOAD_DIR/solr-$SOLR_VERSION.tgz" /tmp
@@ -47,3 +50,5 @@ chown tomcat:tomcat /var/lib/tomcat/velocity.log
 cp $SHARED_DIR/solr/solr.xml /usr/share/tomcat/conf/Catalina/localhost
 
 systemctl restart tomcat
+
+echo "Solr Installed"
