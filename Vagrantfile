@@ -30,7 +30,6 @@ Vagrant.configure(2) do |config|
   #change root password
   config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mysql/query.sql'"
 
-
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -65,7 +64,8 @@ Vagrant.configure(2) do |config|
      vb.gui = true
   
    # Customize the amount of memory on the VM:
-     vb.memory = "4096"
+     vb.memory = "6114"
+     vb.cpus = "4"
    end
   #
   # View the documentation for the provider you are using for more
