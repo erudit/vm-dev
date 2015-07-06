@@ -22,8 +22,12 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "tomcat/tomcat.sh", args: shared_dir
   config.vm.provision :shell, path: "solr/solr.sh", args: shared_dir
   config.vm.provision :shell, path: "mysql/mysql.sh", args: shared_dir
+  config.vm.provision :shell, path: "eclipse/eclipse.sh", args: shared_dir
   config.vm.network :forwarded_port, host: 4567, guest: 80
   config.vm.network :forwarded_port, host: 8080, guest: 8080 
+
+  #change root password
+  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mysql/query.sql'"
 
 
   # Disable automatic box update checking. If you disable this, then

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-yum update
 yum -y install tomcat tomcat-webapps tomcat-admin-webapps apache-tomcat-apis
 
 #vagrant user

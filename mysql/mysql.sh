@@ -12,4 +12,4 @@ sudo yum -y install mysql-community-server
 sudo systemctl enable mysqld
 sudo systemctl start mysqld
 
-mysql -u root -e "source /vagrant/mysql/query.sql"
+#mysql -u root -e "source $SHARED_DIR/mysql/query.sql"
