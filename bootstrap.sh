@@ -9,4 +9,5 @@ fi
 
 yum update
 yum -y install vim nano git
-yum -y groupinstall 'Development Tools'
+
+sudo systemctl stop firewalld

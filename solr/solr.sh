@@ -1,4 +1,3 @@
-echo "Installing Solr"
 SHARED_DIR=$1
 
 if [ -f "$SHARED_DIR/config" ]; then
