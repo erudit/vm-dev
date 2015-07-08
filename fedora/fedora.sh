@@ -30,7 +30,7 @@ cp $DOWNLOAD_DIR/fcrepo-installer-${FEDORA_VERSION}.jar $SHARED_DIR/fedora
 cd $SHARED_DIR/fedora
 java -jar fcrepo-installer-${FEDORA_VERSION}.jar install.properties
 rm fcrepo-installer-${FEDORA_VERSION}.jar
-mv $SHARED_DIR/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
+sudo cp $SHARED_DIR/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
 
 sudo chown -R tomcat:tomcat /var/lib/tomcat/fedora
 
