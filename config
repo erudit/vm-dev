@@ -12,12 +12,7 @@ if [ ! -d $DOWNLOAD_DIR ]; then
   mkdir $DOWNLOAD_DIR
 fi
 
-#FEDORA_VERSION=3.4.2
-#FEDORA_TAG=3.4.2
-# true to enable auth, false to disable it
-#FEDORA_AUTH=false
-#FEDORA_AUDIT=true
-#FEDORA_AUDIT_LOCATION=/audit
+FEDORA_VERSION=3.4.2
 
 SOLR_VERSION=4.10.3
 SOLR_HOME=/var/lib/tomcat/solr

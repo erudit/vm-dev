@@ -18,12 +18,15 @@ Vagrant.configure(2) do |config|
   shared_dir = "/vagrant"
 
   config.vm.provision :shell, path: "bootstrap.sh", args: shared_dir
+  
+  config.vm.provision :shell, inline: "sudo yum install -y mysql-connector-java"
   config.vm.provision :shell, path: "apache/apache.sh", args: shared_dir
   config.vm.provision :shell, path: "java/java.sh", args: shared_dir
   config.vm.provision :shell, path: "tomcat/tomcat.sh", args: shared_dir
   config.vm.provision :shell, path: "solr/solr.sh", args: shared_dir
   config.vm.provision :shell, path: "mysql/mysql.sh", args: shared_dir
   config.vm.provision :shell, path: "eclipse/eclipse.sh", args: shared_dir
+  config.vm.provision :shell, path: "fedora/fedora.sh", args: shared_dir
 
   #Port redirection if the vm is in Headless Mode
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
@@ -63,7 +66,7 @@ Vagrant.configure(2) do |config|
   #
    config.vm.provider "virtualbox" do |vb|
      # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
+     vb.gui = false
   
    # Customize the amount of memory on the VM:
      vb.memory = "6114"

@@ -9,7 +9,7 @@ fi
 echo "Installing MySQL"
 
 sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-sudo yum -y install mysql-community-server
+sudo yum -y install mysql-community-server mysql-connector-java
 
 sudo systemctl enable mysqld
 sudo systemctl start mysqld
