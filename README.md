@@ -21,8 +21,8 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
    * Username: admin Password: admin
  * Mariadb
    * Username: root Password: root
-   * Database: fedora
-     * Username: fedoraAdmin Password: fedoraAdmin
+     * Database: fedora
+       * Username: fedoraAdmin Password: fedoraAdmin
  * Fedora-Commons 3.4.2
    * Username: fedoraAdmin Password: fedoraAdmin
  * Solr 4.10.3
