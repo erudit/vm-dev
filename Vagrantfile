@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "java/java.sh", args: shared_dir
   config.vm.provision :shell, path: "tomcat/tomcat.sh", args: shared_dir
   config.vm.provision :shell, path: "solr/solr.sh", args: shared_dir
-  config.vm.provision :shell, path: "mysql/mysql.sh", args: shared_dir
+  config.vm.provision :shell, path: "mariadb/mariadb.sh", args: shared_dir
   config.vm.provision :shell, path: "eclipse/eclipse.sh", args: shared_dir
   config.vm.provision :shell, path: "fedora/fedora.sh", args: shared_dir
 
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
   config.vm.network :forwarded_port, host: 8080, guest: 8080, auto_correct: true 
 
   #Change MySQL root password
-  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mysql/query.sql'"
+  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mariadb/query.sql'"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

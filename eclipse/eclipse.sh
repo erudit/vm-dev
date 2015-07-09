@@ -16,5 +16,6 @@ fi
 
 cd $HOME_DIR
 tar -xzf $DOWNLOAD_DIR/eclipse-mars.tar.gz
+sudo chown -R vagrant:vagrant $HOME_DIR/eclipse
 
 echo "Eclipse installed"

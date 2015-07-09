@@ -31,10 +31,11 @@ cd $SHARED_DIR/fedora
 java -jar fcrepo-installer-${FEDORA_VERSION}.jar install.properties
 rm fcrepo-installer-${FEDORA_VERSION}.jar
 
-sudo cp -fv $SHARED_DIR/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
+sleep 60
+sudo chown -R vagrant:vagrant /var/lib/tomcat/webapps/fedora/
+cp -v $SHARED_DIR/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
 
-sudo chown -R tomcat:tomcat /var/lib/tomcat/fedora
-
+sudo chown -R tomcat:tomcat /var/lib/tomcat/
 sudo systemctl restart tomcat
 echo "Fedora Installed"
 
