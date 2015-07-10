@@ -26,10 +26,7 @@ fi
 
 sudo ln -s /usr/share/tomcat/lib/ /usr/share/tomcat/common/lib
 
-cp $DOWNLOAD_DIR/fcrepo-installer-${FEDORA_VERSION}.jar $SHARED_DIR/fedora
-cd $SHARED_DIR/fedora
-java -jar fcrepo-installer-${FEDORA_VERSION}.jar install.properties
-rm fcrepo-installer-${FEDORA_VERSION}.jar
+java -jar $DOWNLOAD_DIR/fcrepo-installer-${FEDORA_VERSION}.jar $SHARED_DIR/fedora/install.properties
 
 sleep 60
 sudo chown -R vagrant:vagrant /var/lib/tomcat/webapps/fedora/
