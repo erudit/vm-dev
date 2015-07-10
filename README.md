@@ -42,3 +42,10 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
   - Stop the Vm and save state
 - vagrant ssh
   - Ssh into the running Vagrant machine
+
+## Windows User
+
+If you want to use **vagrant ssh** you will need git or cygwin.
+
+  * [Git](https://git-scm.com/downloads)
+  * [Cygwin](https://cygwin.com/install.html)
