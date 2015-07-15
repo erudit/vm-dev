@@ -17,21 +17,21 @@ Vagrant.configure(2) do |config|
 
   shared_dir = "/vagrant"
 
-  config.vm.provision :shell, path: "bootstrap.sh", args: shared_dir
-  config.vm.provision :shell, path: "apache/apache.sh", args: shared_dir
-  config.vm.provision :shell, path: "java/java.sh", args: shared_dir
-  config.vm.provision :shell, path: "tomcat/tomcat.sh", args: shared_dir
-  config.vm.provision :shell, path: "solr/solr.sh", args: shared_dir
-  config.vm.provision :shell, path: "mariadb/mariadb.sh", args: shared_dir
-  config.vm.provision :shell, path: "eclipse/eclipse.sh", args: shared_dir
-  config.vm.provision :shell, path: "fedora/fedora.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/solr/solr.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/mariadb/mariadb.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/eclipse/eclipse.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
 
   #Port redirection if the vm is in Headless Mode
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
   config.vm.network :forwarded_port, host: 8080, guest: 8080, auto_correct: true 
   
   #Change MySQL root password
-  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mariadb/query.sql'"
+  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/scripts/mariadb/query.sql'"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

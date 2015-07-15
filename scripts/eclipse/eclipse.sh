@@ -4,8 +4,8 @@ SHARED_DIR=$1
 
 echo "Installing Eclipse"
 
-if [ -f "$SHARED_DIR/config" ]; then
-	  . $SHARED_DIR/config
+if [ -f "$SHARED_DIR/scripts/config" ]; then
+	  . $SHARED_DIR/scripts/config
 fi
 
 if [ ! -f "$DOWNLOAD_DIR/eclipse-mars.tar.gz" ]; then

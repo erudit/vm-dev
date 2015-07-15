@@ -2,8 +2,8 @@
 
 SHARED_DIR=$1
 
-if [ -f "$SHARED_DIR/config" ]; then
-	. $SHARED_DIR/config
+if [ -f "$SHARED_DIR/scripts/config" ]; then
+	. $SHARED_DIR/scripts/config
 fi
 
 echo "Installing Fedora"
@@ -26,11 +26,11 @@ fi
 
 sudo ln -s /usr/share/tomcat/lib/ /usr/share/tomcat/common/lib
 
-java -jar $DOWNLOAD_DIR/fcrepo-installer-${FEDORA_VERSION}.jar $SHARED_DIR/fedora/install.properties
+java -jar $DOWNLOAD_DIR/fcrepo-installer-${FEDORA_VERSION}.jar $SHARED_DIR/scripts/fedora/install.properties
 
 sleep 60
 sudo chown -R vagrant:vagrant /var/lib/tomcat/webapps/fedora/
-cp -v $SHARED_DIR/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
+cp -v $SHARED_DIR/scripts/fedora/web.xml /var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
 
 sudo chown -R tomcat:tomcat /var/lib/tomcat/
 sudo systemctl restart tomcat

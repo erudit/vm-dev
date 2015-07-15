@@ -2,6 +2,7 @@
 
 echo "Installing Apache"
 
-yum -y install httpd
-systemctl start httpd
+sudo yum -y install httpd
+sudo systemctl start httpd
+
 echo "Apache Installed"

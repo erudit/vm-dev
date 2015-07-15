@@ -2,10 +2,10 @@
 
 echo "Installing Tomcat"
 
-yum -y install tomcat tomcat-webapps tomcat-admin-webapps apache-tomcat-apis
+sudo yum -y install tomcat tomcat-webapps tomcat-admin-webapps apache-tomcat-apis
 
 #vagrant user
-usermod -a -G tomcat vagrant
+sudo usermod -a -G tomcat vagrant
 
 #tomcat user config
 if ! grep -q "role rolename=\"fedoraAdmin\"" /etc/tomcat/tomcat-users.xml ; then
@@ -20,6 +20,6 @@ fi
 
 
 #starting tomcat
-systemctl start tomcat
+sudo systemctl start tomcat
 
 echo "Tomcat Installed"

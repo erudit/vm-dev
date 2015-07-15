@@ -1,7 +1,5 @@
 #!/bin/sh
-#
 # Contain Environment variables for installs
-#
 
 HOME_DIR="/home/vagrant"
 
