@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
   #Port redirection if the vm is in Headless Mode
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
   config.vm.network :forwarded_port, host: 8080, guest: 8080, auto_correct: true 
-
+  
   #Change MySQL root password
   config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/mariadb/query.sql'"
 

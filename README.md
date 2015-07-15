@@ -32,16 +32,17 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
 
 - vagrant up
   - Start the VM
-- vagrant destroy
-  - Stop the VM and delete all traces
 - vagrant halt
   - Stop the VM
 - vagrant provision
-  - Run any configured provisioners configured in the Vagrantfile
+  - Run any configured provisioner configured in the Vagrantfile
 - vagrant suspend
-  - Stop the Vm and save state
+  - Stop the VM and save state
 - vagrant ssh
   - Ssh into the running Vagrant machine
+- vagrant destroy
+  - Stop the VM and delete all traces
+
 
 ## Windows User
 
