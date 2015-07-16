@@ -3,3 +3,5 @@ downloads/
 .vagrant/
 
 #files
+*.box
+*.iso

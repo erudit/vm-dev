@@ -10,7 +10,7 @@ fi
 
 if [ ! -f "$DOWNLOAD_DIR/jdk-7u80-linux-x64.tar.gz" ]; then
   echo -n "Downloading Java..."
-  wget -q -O "$DOWNLOAD_DIR/jdk-7u80-linux-x64.tar.gz" --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz"
+  wget -q -O "$DOWNLOAD_DIR/jdk-7u80-linux-x64.tar.gz" --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz"
   echo " done"
 fi
 
