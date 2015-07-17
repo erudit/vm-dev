@@ -2,7 +2,6 @@
 pacher_cache/
 downloads/
 .vagrant/
-share/
 
 #files
 *.box
