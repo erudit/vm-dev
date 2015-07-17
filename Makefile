@@ -8,4 +8,5 @@ vagrant:
 
 clean:
 	vagrant destroy -f
+	vagrant box remove "centos 7.0"
 	rm -f *.box

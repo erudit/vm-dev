@@ -23,7 +23,6 @@ Vagrant.configure(2) do |config|
 
   shared_dir = "/vagrant"
   config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/packer/virtualbox.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
