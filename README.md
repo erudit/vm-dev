@@ -2,7 +2,7 @@
 Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
 
 ## Requirements
-
+* [Packer](https://packer.io/) (Only for .box creation)
 * [Vagrant](https://www.vagrantup.com/)
 * [VirtualBox](https://www.virtualbox.org/)
 
