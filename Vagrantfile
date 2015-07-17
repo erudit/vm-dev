@@ -1,19 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#required_plugins = %w(vagrant-share vagrant-vbguest...)
-required_plugins = %w( vagrant-vbguest )
-
-plugins_to_install = required_plugins.select { |plugin| not Vagrant.has_plugin? plugin }
-if not plugins_to_install.empty?
-  puts "Installing plugins: #{plugins_to_install.join(' ')}"
-  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
-    exec "vagrant #{ARGV.join(' ')}"
-  else
-    abort "Installation of one or more plugins has failed. Aborting."
-  end
-end
-
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -29,28 +16,14 @@ Vagrant.configure(2) do |config|
 
   # Config pour Packer
   config.vm.box = "centos 7.0"
-  config.vm.box_url = "./centos7.0.box"
+  config.vm.box_url = "./centos-7.0.box"
 
-  #config.file.share_folder = "/vagrant" # Default?
+  # Shared/Synced folder
+  config.vm.synced_folder "share/", "/mnt/share"
+
   shared_dir = "/vagrant"
-
-
-  # https://github.com/dotless-de/vagrant-vbguest
-  # we will try to autodetect this path. 
-  # However, if we cannot or you have a special one you may pass it like:
-  # config.vbguest.iso_path = "#{ENV['HOME']}/Downloads/VBoxGuestAdditions.iso"
-  # or
-  # config.vbguest.iso_path = "http://company.server/VirtualBox/%{version}/VBoxGuestAdditions.iso"
-
-  # set auto_update to false, if you do NOT want to check the correct 
-  # additions version when booting this machine
-  # config.vbguest.auto_update = false
-
-  # do NOT download the iso file from a webserver
-  # config.vbguest.no_remote = true
-
-
   config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/packer/virtualbox.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
@@ -63,9 +36,6 @@ Vagrant.configure(2) do |config|
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
   config.vm.network :forwarded_port, host: 8080, guest: 8080, auto_correct: true 
   
-  #Change MySQL root password
-  config.vm.provision :shell, inline: "mysql -u root -e 'source /vagrant/scripts/mariadb/query.sql'"
-
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -103,7 +73,7 @@ Vagrant.configure(2) do |config|
      vb.memory = "4096"
      vb.cpus = "3"
    end
-  #
+
   # View the documentation for the provider you are using for more
   # information on available options.
 

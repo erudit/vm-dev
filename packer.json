@@ -1,18 +1,17 @@
 {
   "builders": [
     {
-      "vm_name": "centos7.0",
+      "vm_name": "centos-7.0",
       "guest_os_type": "RedHat_64",
       "iso_checksum_type": "sha256",
       "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
       "iso_url": "http://centos.mirror.iweb.ca/7/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso",
       "type": "virtualbox-iso",
+      "guest_additions_path": "VBoxGuestAdditions.iso",
+      "virtualbox_version_file": ".vbox_version",
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "50000s",
-      "guest_additions_path": "/home/vagrant/VBoxGuestAdditions.iso",
-      "guest_additions_url": "./VBoxGuestAdditions_5.0.0.iso",
-      "guest_additions_sha256": "7b61f523db7ba75aebc4c7bb0cae2da92674fa72299e4a006c5c67517f7d786b",
       "headless": "false",
       "vboxmanage": [
         [
@@ -39,8 +38,9 @@
     {
       "type": "shell",
       "scripts": [
+        "scripts/packer/init.sh",
+        "scripts/packer/vmtools.sh",
         "scripts/packer/vagrant.sh",
-        "scripts/packer/virtualbox.sh",
         "scripts/packer/cleanup.sh"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'"
@@ -50,7 +50,7 @@
     {
       "type": "vagrant",
       "compression_level": 9,
-      "output": "centos7.0.box"
+      "output": "centos-7.0.box"
     }
   ]
 }
