@@ -31,7 +31,24 @@ Vagrant.configure(2) do |config|
   config.vm.box = "centos 7.0"
   config.vm.box_url = "./centos7.0.box"
 
+  #config.file.share_folder = "/vagrant" # Default?
   shared_dir = "/vagrant"
+
+
+  # https://github.com/dotless-de/vagrant-vbguest
+  # we will try to autodetect this path. 
+  # However, if we cannot or you have a special one you may pass it like:
+  # config.vbguest.iso_path = "#{ENV['HOME']}/Downloads/VBoxGuestAdditions.iso"
+  # or
+  # config.vbguest.iso_path = "http://company.server/VirtualBox/%{version}/VBoxGuestAdditions.iso"
+
+  # set auto_update to false, if you do NOT want to check the correct 
+  # additions version when booting this machine
+  # config.vbguest.auto_update = false
+
+  # do NOT download the iso file from a webserver
+  # config.vbguest.no_remote = true
+
 
   config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
