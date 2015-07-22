@@ -8,5 +8,9 @@ yum -y install gcc kernel-devel kernel-headers perl cpp dkms make bzip2 git
 sudo yum -y groupinstall "GNOME Desktop" "Graphical Administration Tools"
 sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
 
+# Add EPEL repository
+rpm -ivh  http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm 
+sudo yum -y install ansible
+
 # cp /vagrant/erudit.png /home/vagrant/Pictures/erudit.png # Dir exists?"
 # gsettings set org.gnome.desktop.background picture-uri file:///home/vagrant/Pictures/erudit.png
