@@ -12,4 +12,4 @@ fi
 #sudo yum -y groupinstall "GNOME Desktop" "Graphical Administration Tools"
 #sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.target
 
-sudo systemctl stop firewalld
+#sudo systemctl stop firewalld

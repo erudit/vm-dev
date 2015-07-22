@@ -23,14 +23,20 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "share/", "/mnt/share"
 
   shared_dir = "/vagrant"
-  config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/solr/solr.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/mariadb/mariadb.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/eclipse/eclipse.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
+
+  #Shell script configuration
+  #config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/solr/solr.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/mariadb/mariadb.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/eclipse/eclipse.sh", args: shared_dir
+  #config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
+ 
+  #Ansible configuration script
+  config.vm.provision :shell, path: "scripts/ansible/init.sh", args: shared_dir
+
 
   #Port mapping and forwarding
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
@@ -43,12 +49,12 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  #config.vm.network "private_network", ip: "192.168.50.4"
+  # config.vm.network "private_network", ip: "192.168.10.150"
    
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  # config.vm.network "public_network"
+#   config.vm.network "public_network"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
