@@ -1,12 +1,12 @@
 ---
-- name: Install MariaDB package
-  yum : name=mariadb-server
+- include: apt_package.yml
+  when: ansible_pkg_mgr == 'apt'
+- include: yum_package.yml
+  when: ansible_pkg_mgr == 'yum'
 
 - name: Create MariaDB configuration file
   template : src=my.cnf.j2 dest=/etc/my.cnf
-  notify: 
-  - restart mariadb
-
-- name: Start MariaDB service 
-  service : name=mariadb state=started enabled=yes
-
+  notify: restart mysql
+  when: ansible_pkg_mgr == 'apt'
+  notify: restart mariadb
+  when: ansible_pkg_mgr == 'yum'

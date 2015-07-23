@@ -18,6 +18,11 @@ Vagrant.configure(2) do |config|
   # Config pour Packer
   config.vm.box = "centos 7.0"
   config.vm.box_url = "./centos-7.0.box"
+  
+  #Ubuntu base box
+  #config.vm.box = "ubuntu/vivid64" 
+  #Debian base box
+  #config.vm.box = "debian/jessie64"
 
   # Shared/Synced folder
   config.vm.synced_folder "share/", "/mnt/share"
@@ -35,6 +40,7 @@ Vagrant.configure(2) do |config|
   #config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
  
   #Ansible configuration script
+  #config.vm.provision :shell, inline: "apt-get install -y ansible"
   config.vm.provision :shell, path: "scripts/ansible/init.sh", args: shared_dir
 
 

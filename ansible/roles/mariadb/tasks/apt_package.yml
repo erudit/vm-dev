@@ -1,0 +1,14 @@
+---
+#Task file for installing MariaDB on apt based distros
+
+- name: Install MariaDB repository
+  apt_repository: repo='deb http://ftp.igh.cnrs.fr/pub/mariadb/repo/10.0/ubuntu trusty main' state=present
+- name: Add repository key to the system
+  apt_key: keyserver=keyserver.ubuntu.com id=0xcbcb082a1bb943db
+- name: Install MariaDB via apt
+  apt: name=mariadb-server update_cache=yes
+  tags: packages
+- name: Start MariaDB service 
+  service : name=mysql state=started enabled=yes 
+  tags: packages
+
