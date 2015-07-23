@@ -4,9 +4,14 @@
 - include: yum_package.yml
   when: ansible_pkg_mgr == 'yum'
 
-- name: Create MariaDB configuration file
-  template : src=my.cnf.j2 dest=/etc/my.cnf
+- name: Create MariaDB configuration file Debian/Ubuntu
+  template : src=myDebian.cnf.j2 dest=/etc/mysql/my.cnf
   notify: restart mysql
-  when: ansible_pkg_mgr == 'apt'
+  #  when: ansible_pkg_mgr == 'apt'
+  when: ansible_os_family == 'Debian'
+
+- name: Create MariaDB configuration file RedHat/CentOS
+  template : src=myRedhat.cnf.j2 dest=/etc/my.cnf
   notify: restart mariadb
-  when: ansible_pkg_mgr == 'yum'
+  #when: ansible_pkg_mgr == 'yum'
+  when: ansible_os_family == 'RedHat'

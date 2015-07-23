@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "centos 7.0"
   config.vm.box_url = "./centos-7.0.box"
   
+  #TMP hashicorp box until we have some
   #Ubuntu base box
   #config.vm.box = "ubuntu/vivid64" 
   #Debian base box
@@ -40,7 +41,8 @@ Vagrant.configure(2) do |config|
   #config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
  
   #Ansible configuration script
-  #config.vm.provision :shell, inline: "apt-get install -y ansible"
+  #/tmp configuration until we have some ubuntu or debian box
+  #config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/ansible/init.sh", args: shared_dir
 
 
