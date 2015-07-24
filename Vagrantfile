@@ -16,12 +16,12 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "erudit-vm-dev"
   
   # Config pour Packer
-  config.vm.box = "centos 7.0"
-  config.vm.box_url = "./centos-7.0.box"
+  #config.vm.box = "centos 7.0"
+  #config.vm.box_url = "./centos-7.0.box"
   
   #TMP hashicorp box until we have some
   #Ubuntu base box
-  #config.vm.box = "ubuntu/vivid64" 
+  config.vm.box = "ubuntu/vivid64" 
   #Debian base box
   #config.vm.box = "debian/jessie64"
 
@@ -42,7 +42,7 @@ Vagrant.configure(2) do |config|
  
   #Ansible configuration script
   #/tmp configuration until we have some ubuntu or debian box
-  #config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/ansible/init.sh", args: shared_dir
 
 
