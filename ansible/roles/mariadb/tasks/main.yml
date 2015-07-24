@@ -1,9 +1,11 @@
 ---
+#Install and start MariaDB
 - include: apt_package.yml
   when: ansible_os_family == 'Debian'
 - include: yum_package.yml
   when: ansible_os_family == 'RedHat'
 
+#Adding MariaDB configuration
 - name: Create MariaDB configuration file Debian/Ubuntu
   template : src=myDebian.cnf.j2 dest=/etc/mysql/my.cnf
   notify: restart mysql
