@@ -1,0 +1,38 @@
+---
+- include: yum_package.yml
+  when: ansible_os_family == 'RedHat'
+- include: apt_package.yml
+  when: ansible_os_family == 'Debian'
+
+#RedHat/CentOS Tomcat 7 Configuration
+- name: Change ownership of Tomcat installation
+  file: path=/usr/share/tomcat owner=tomcat group=tomcat state=directory recurse=yes
+  when: ansible_os_family == 'RedHat'
+
+- name: Configure Tomcat server
+  template: src=server.xml dest=/usr/share/tomcat/conf
+  notify: restart tomcat
+  when: ansible_os_family == 'RedHat'
+
+- name: Configure Tomcat user
+  template: src=tomcat-users.xml dest=/usr/share/tomcat/conf
+  notify: restart tomcat
+  when: ansible_os_family == 'RedHat'
+
+#Debian/Ubuntu Tomcat 7 Configuration
+- name: Change ownership of Tomcat installation
+  file: path=/ets/tomcat7 owner=tomcat7 group=tomcat7 state=directory recurse=yes
+  when: ansible_os_family == 'Debian'
+
+- name: Configure Tomcat server
+  template: src=server.xml dest=/etc/tomcat7
+  notify: restart tomcat7
+  when: ansible_os_family == 'Debian'
+
+- name: Configure Tomcat user
+  template: src=tomcat-users.xml dest=/etc/tomcat7
+  notify: restart tomcat7
+  when: ansible_os_family == 'Debian'
+
+  #- name: wait for Tomcat to start
+  #wait_for: port={{http_port}}

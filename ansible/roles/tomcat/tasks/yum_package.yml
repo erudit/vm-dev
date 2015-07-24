@@ -1,0 +1,10 @@
+---
+- name: Install Tomcat via yum
+  yum: pkg={{item}} 
+  with_items:
+    - tomcat
+    - tomcat-webapps
+    - tomcat-admin-webapps
+
+- name: Start tomcat
+  service: name=tomcat state=started enabled=yes

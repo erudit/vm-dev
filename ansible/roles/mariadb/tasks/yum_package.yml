@@ -3,6 +3,5 @@
 
 - name: Install MariaDB via yum
   yum: name=mariadb-server
-  tags: packages
 - name: Start MariaDB service
   service: name=mariadb state=started enabled=yes

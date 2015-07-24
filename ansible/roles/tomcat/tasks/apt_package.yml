@@ -1,0 +1,9 @@
+---
+- name: Install Tomcat via apt
+  apt: name={{item}}
+  with_items:
+      - tomcat7
+      - tomcat7-admin
+
+- name: Start tomcat7
+  service: name=tomcat7 state=started enabled=yes
