@@ -36,6 +36,11 @@
   ],
   "provisioners": [
     {
+  	"type": "file",
+	"source": "images/erudit.png",
+	"destination": "/tmp/erudit.png"
+    },
+    {
       "type": "shell",
       "scripts": [
         "scripts/packer/init.sh",
