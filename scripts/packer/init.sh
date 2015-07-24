@@ -12,5 +12,7 @@ sudo ln -sf /lib/systemd/system/runlevel5.target /etc/systemd/system/default.tar
 rpm -ivh  http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm 
 sudo yum -y install ansible
 
-# cp /vagrant/erudit.png /home/vagrant/Pictures/erudit.png # Dir exists?"
-# gsettings set org.gnome.desktop.background picture-uri file:///home/vagrant/Pictures/erudit.png
+# Add default desktop background for dev vm
+mkdir -p /home/vagrant/Pictures
+cp /vagrant/images/erudit.png /home/vagrant/Pictures/erudit.png
+gsettings set org.gnome.desktop.background picture-uri file:///home/vagrant/Pictures/erudit.png
