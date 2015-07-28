@@ -41,6 +41,11 @@
 	"destination": "/tmp/erudit.png"
     },
     {
+  	"type": "file",
+	"source": "files/default.xml",
+	"destination": "/tmp/default.xml"
+    },
+    {
       "type": "shell",
       "scripts": [
         "scripts/packer/init.sh",

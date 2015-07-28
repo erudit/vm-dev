@@ -15,4 +15,4 @@ sudo yum -y install ansible
 # Add default desktop background for dev vm
 mkdir -p /home/vagrant/Pictures
 cp /tmp/erudit.png /home/vagrant/Pictures/
-gsettings set org.gnome.desktop.background picture-uri file:///home/vagrant/Pictures/erudit.png
+sudo cp /tmp/default.xml /usr/share/backgrounds/

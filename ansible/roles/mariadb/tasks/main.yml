@@ -5,6 +5,12 @@
 - include: yum_package.yml
   when: ansible_os_family == 'RedHat'
 
+
+- name: Change the root password
+  mysql_user: user="root"
+              password="{{ mysql_root_password }}"
+              host="localhost"
+
 #Adding MariaDB configuration
 - name: Create MariaDB configuration file Debian/Ubuntu
   template : src=myDebian.cnf.j2 dest=/etc/mysql/my.cnf
@@ -15,3 +21,19 @@
   template : src=myRedhat.cnf.j2 dest=/etc/my.cnf
   notify: restart mariadb
   when: ansible_os_family == 'RedHat'
+
+
+- name: Copy .my.cnf to the root home directory
+  become: yes
+  copy: src=/etc/mysql/my.cnf dest=/root/.my.cnf
+  when: ansible_os_family == 'Debian'
+
+- name: Copy .my.cnf to the root home directory
+  become: yes
+  copy: src=/etc/my.cnf dest=/root/.my.cnf
+  when: ansible_os_family == 'RedHat'
+
+- name: Delete the anonymous sql server user
+  mysql_user: user=""
+              state="absent"
+
