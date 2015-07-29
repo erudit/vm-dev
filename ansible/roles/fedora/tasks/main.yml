@@ -1,4 +1,5 @@
 ---
 
-- name: test
-  debug: msg="kek"
+- name: Download Fedora-Commons source
+  get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar
+
