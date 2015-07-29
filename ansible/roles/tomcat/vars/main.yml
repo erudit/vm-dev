@@ -1,9 +1,4 @@
 ---
-#Tomcat ip address and port
-http_port: 8080
-https_port: 8443
-ip_address: 127.0.0.1
-
 #Tomcat user and password
 admin_username: admin
 admin_password: admin

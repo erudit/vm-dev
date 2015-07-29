@@ -1,0 +1,11 @@
+---
+
+- name: Create the fedora database
+  mysql_db: name="fedora"
+            state="present"
+
+- name: Create the fedora-commons user
+  mysql_user: name="fedoraAdmin"
+              password="fedoraAdmin"
+              state="present"
+              priv="fedora.*:ALL"

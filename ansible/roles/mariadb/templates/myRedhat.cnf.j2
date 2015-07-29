@@ -13,11 +13,11 @@ symbolic-links=0
 log-error=/var/log/mariadb/mariadb.log
 pid-file=/var/run/mariadb/mariadb.pid
 
-#
-# include all files from the config directory
-#
-#!includedir /etc/my.cnf.d
-
 [client]
 user=root
 password={{ mysql_root_password }}
+
+#
+# include all files from the config directory
+#
+#!includedir /etc/my.cnf.d/

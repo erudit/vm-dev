@@ -5,7 +5,7 @@
 - include: yum_package.yml
   when: ansible_os_family == 'RedHat'
 
-
+#Root password
 - name: Change the root password
   mysql_user: user="root"
               password="{{ mysql_root_password }}"
@@ -23,15 +23,14 @@
   when: ansible_os_family == 'RedHat'
 
 - name: Copy .my.cnf to the root home directory
-  become: yes
   copy: src=/etc/mysql/my.cnf dest=/root/.my.cnf
   when: ansible_os_family == 'Debian'
 
 - name: Copy .my.cnf to the root home directory
-  become: yes
   copy: src=/etc/my.cnf dest=/root/.my.cnf
   when: ansible_os_family == 'RedHat'
 
+#Delete the useless code
 - name: Delete the anonymous sql server user
   mysql_user: user=""
               state="absent"
@@ -45,3 +44,5 @@
   mysql_db: name="test"
             state="absent"
 
+#Fedora-Commons configuration
+- include: fedora.yml

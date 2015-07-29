@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
   #Ansible configuration script
   #/tmp configuration until we have some ubuntu or debian box
   #config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
-  config.vm.provision :shell, path: "scripts/ansible/init.sh", args: shared_dir
+  config.vm.provision :shell, path: "scripts/ansible/init.sh", privileged: false, args: shared_dir
 
 
   #Port mapping and forwarding

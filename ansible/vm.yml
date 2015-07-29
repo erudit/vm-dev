@@ -5,6 +5,7 @@
   sudo: yes
 
   roles:
+    - fedora
     - mariadb
     - tomcat
     - apache

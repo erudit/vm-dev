@@ -68,7 +68,7 @@
          APR (HTTP/AJP) Connector: /docs/apr.html
          Define a non-SSL HTTP/1.1 Connector on port 8080
     -->
-    <Connector address="{{ ip_address }}" port="{{ http_port }}" protocol="HTTP/1.1"
+    <Connector address="{{ tomcat_host }}" port="{{ tomcat_http_port }}" protocol="HTTP/1.1"
                connectionTimeout="20000"
                redirectPort="8443" />
     <!-- A "Connector" using the shared thread pool-->
@@ -83,7 +83,7 @@
          connector should be using the OpenSSL style configuration
          described in the APR documentation -->
     <!--
-    <Connector port="{{ https_port }}" protocol="HTTP/1.1" SSLEnabled="true"
+    <Connector port="{{ tomcat_https_port }}" protocol="HTTP/1.1" SSLEnabled="true"
                maxThreads="150" scheme="https" secure="true"
                clientAuth="false" sslProtocol="TLS" />
     -->
