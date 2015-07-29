@@ -22,7 +22,6 @@
   notify: restart mariadb
   when: ansible_os_family == 'RedHat'
 
-
 - name: Copy .my.cnf to the root home directory
   become: yes
   copy: src=/etc/mysql/my.cnf dest=/root/.my.cnf
@@ -36,4 +35,13 @@
 - name: Delete the anonymous sql server user
   mysql_user: user=""
               state="absent"
+
+- name: Delete the anonymous sql server user
+  mysql_user: user=""
+              host="erudit-vm-dev"
+              state="absent"
+  
+- name: Remove the MariaDB test database
+  mysql_db: name="test"
+            state="absent"
 
