@@ -10,3 +10,7 @@ fedora_db_password: fedoraAdmin
 
 #Fedora configuration
 fedora_version: 3.4.2
+
+#Tomcat configuration
+tomcat_http_port: 8080
+tomcat_https_port: 8443

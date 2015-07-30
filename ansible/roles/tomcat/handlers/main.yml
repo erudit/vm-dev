@@ -4,10 +4,10 @@
 - name: restart tomcat7
   service: name=tomcat7 state=restarted
 
-- name: change ownership redhat
+- name: change tomcat ownership redhat
   file: path=/usr/share/tomcat owner=tomcat group=tomcat state=directory recurse=yes
   when: ansible_os_family == 'RedHat'
 
-- name: change ownership debian
+- name: change tomcat ownership debian
   file: path=/etc/tomcat7 owner=tomcat group=tomcat state=directory recurse=yes
   when: ansible_os_family == 'Debian'

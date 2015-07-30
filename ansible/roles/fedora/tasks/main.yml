@@ -11,6 +11,8 @@
 - name: Download mysql-connection-java
   get_url: url=http://mirrors.ibiblio.org/pub/mirrors/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar 
 
+- debug: var=tomcat_http_port
+
 - name: Install Fedora-Commons
   shell: java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /vagrant/ansible/roles/fedora/templates/install.properties.j2 
 
@@ -19,5 +21,6 @@
 
 - name: Copy web.xml in the fedora-commons folder
   copy: src=/vagrant/ansible/roles/fedora/files/web.xml dest=/var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
-  notify: change ownership
-
+  notify: 
+    - change fedora ownership
+    - change tomcat ownership redhat

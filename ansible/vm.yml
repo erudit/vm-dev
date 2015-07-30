@@ -8,4 +8,4 @@
     - mariadb
     - tomcat
     - apache
-    - fedora
+    - { role: fedora, tomcat_http_port: 8080, tomcat_https_port: 8443 }
