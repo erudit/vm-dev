@@ -11,10 +11,11 @@
 - name: Download mysql-connection-java
   get_url: url=http://mirrors.ibiblio.org/pub/mirrors/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar 
 
-- debug: var=tomcat_http_port
+- name: Copy install.properties
+  template: src=/vagrant/ansible/roles/fedora/templates/install.properties.j2 dest=/tmp/install.properties
 
 - name: Install Fedora-Commons
-  shell: java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /vagrant/ansible/roles/fedora/templates/install.properties.j2 
+  shell: java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
 
 - name: Pause for 1 minute
   pause: minutes=1

@@ -69,12 +69,16 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
 
    config.vm.provider "virtualbox" do |vb|
-     # Display the VirtualBox GUI when booting the machine
+   # Display the VirtualBox GUI when booting the machine
      vb.gui = true
   
    # Customize the amount of memory on the VM:
      vb.memory = "4096"
      vb.cpus = "3"
+
+   # Birectionnal clipboard and drag'n'drop
+     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
+     vb.customize ['modifyvm', :id, '--draganddrop', 'bidirectional']  
    end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
