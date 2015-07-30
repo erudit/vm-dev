@@ -1,5 +1,23 @@
 ---
-
 - name: Download Fedora-Commons source
   get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar
+
+- name: Create common folder in tomcat root
+  file: path=/usr/share/tomcat/common state=directory
+
+- name: Create symbolic link
+  file: src=/usr/share/tomcat/lib path=/usr/share/tomcat/common/lib state=link
+
+- name: Download mysql-connection-java
+  get_url: url=http://mirrors.ibiblio.org/pub/mirrors/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar 
+
+- name: Install Fedora-Commons
+  shell: java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /vagrant/ansible/roles/fedora/templates/install.properties.j2 
+
+- name: Pause for 1 minute
+  pause: minutes=1
+
+- name: Copy web.xml in the fedora-commons folder
+  copy: src=/vagrant/ansible/roles/fedora/files/web.xml dest=/var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
+  notify: change ownership
 

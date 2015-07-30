@@ -7,4 +7,3 @@ mysql_root_password: root
 tomcat_http_port: 8080
 tomcat_https_port: 8443
 tomcat_host: 127.0.0.1
-

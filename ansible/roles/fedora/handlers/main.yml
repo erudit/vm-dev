@@ -1,0 +1,4 @@
+---
+- name: change ownership
+  file: path=/var/lib/tomcat owner=tomcat group=tomcat
+
