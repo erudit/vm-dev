@@ -8,7 +8,7 @@ Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
 
 ## Usage
 
-1. `git clone https://github.com/eruditorg/vm-dev.git`
+1. `git clone https://github.com/erudit/vm-dev.git`
 2. `cd vm-dev`
 3. `vagrant up`
 

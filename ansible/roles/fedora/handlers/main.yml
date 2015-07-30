@@ -1,4 +1,5 @@
 ---
 - name: change fedora ownership
   file: path=/var/lib/tomcat owner=tomcat group=tomcat state=directory recurse=yes
-
+- name: pause
+  pause: minutes:1

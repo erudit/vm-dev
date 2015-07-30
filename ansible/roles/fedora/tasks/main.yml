@@ -15,10 +15,10 @@
   template: src=/vagrant/ansible/roles/fedora/templates/install.properties.j2 dest=/tmp/install.properties
 
 - name: Install Fedora-Commons
-  shell: java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
-
-- name: Pause for 1 minute
-  pause: minutes=1
+  command: /usr/bin/java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates=/var/lib/tomcat/fedora
+  
+- name: Wait until the webapps is installed
+  wait_for: path=/var/lib/tomcat/webapps/fedora
 
 - name: Copy web.xml in the fedora-commons folder
   copy: src=/vagrant/ansible/roles/fedora/files/web.xml dest=/var/lib/tomcat/webapps/fedora/WEB-INF/web.xml
