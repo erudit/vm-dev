@@ -1,0 +1,42 @@
+---
+- name: Downloading SOLR
+  get_url: url=http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz dest=/vagrant/downloads/solr-{{ solr_version }}.tgz
+
+- name: Extracting SOLR
+  unarchive: src=/vagrant/downloads/solr-{{ solr_version }}.tgz dest=/tmp creates
+
+- name: Installing the SOLR webapps
+  copy: src=/tmp/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war dest=/var/lib/tomcat/webapps/solr.war owner=tomcat group=tomcat
+
+- name: Downloading commons-logging
+  get_url: url=http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar dest=/vagrant/downloads/commons-logging-1.1.2.jar
+
+- name: Copy commons-logging libs in the Tomcat folder
+  copy: src=/vagrant/downloads/commons-logging-1.1.2.jar dest=/usr/share/tomcat/lib/commons-logging-1.1.2.jar owner=tomcat group=tomcat
+
+- name: Copy log4j libs in the Tomcat folder
+  copy: src=/tmp/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar dest=/usr/share/tomcat/lib/log4j-1.2.17.jar owner=tomcat group=tomcat
+
+- name: Copy slf4j libs in the Tomcat folder
+  copy: src=/tmp/solr-{{ solr_version }}/example/lib/ext/{{item}} dest=/usr/share/tomcat/lib/{{item}} owner=tomcat group=tomcat
+  with_items:
+    - slf4j-api-1.7.6.jar
+    - slf4j-log4j12-1.7.6.jar
+
+- name: stat SOLR folder
+  stat: path={{ solr_home }}
+  register: solr_stat
+
+- name: Installing SOLR
+  command: cp -r /tmp/solr-{{ solr_version }}/example/solr {{ solr_home }}
+  when: solr_stat.stat.exists == false
+
+- name: Copying the schema.xml template
+  template: src=/vagrant/ansible/roles/solr/templates/schema.xml.j2 dest={{ solr_home }}/collection1/conf/schema.xml
+  notify: 
+  - change ownership solr
+
+- name: Copying the solr.xml template
+  template: src=/vagrant/ansible/roles/solr/templates/solr.xml.j2 dest=/usr/share/tomcat/conf/Catalina/localhost/solr.xml
+  notify:
+    - restart tomcat
