@@ -25,3 +25,4 @@
   notify: 
     - change fedora ownership
     - change tomcat ownership redhat
+    - restart tomcat
