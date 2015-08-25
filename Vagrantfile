@@ -30,16 +30,6 @@ Vagrant.configure(2) do |config|
 
   shared_dir = "/vagrant"
 
-  #Shell script configuration
-  #config.vm.provision :shell, path: "scripts/bootstrap.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/apache/apache.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/java/java.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/tomcat/tomcat.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/solr/solr.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/mariadb/mariadb.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/eclipse/eclipse.sh", args: shared_dir
-  #config.vm.provision :shell, path: "scripts/fedora/fedora.sh", args: shared_dir
- 
   #Ansible configuration script
   #/tmp configuration until we have some ubuntu or debian box
   #config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
