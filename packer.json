@@ -12,7 +12,7 @@
       "ssh_password": "vagrant",
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "50000s",
-      "headless": "false",
+      "headless": "true",
       "vboxmanage": [
         [
           "modifyvm",

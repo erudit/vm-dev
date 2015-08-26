@@ -1,0 +1,3 @@
+---
+- name: Create download directory
+  file: path=/vagrant/downloads/ state=directory 

@@ -5,6 +5,7 @@
   sudo: yes
 
   roles:
+    - common
     - mariadb
     - tomcat
     - apache

@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
 
   #Port mapping and forwarding
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
-  config.vm.network :forwarded_port, host: 8080, guest: 8080, auto_correct: true 
+  config.vm.network :forwarded_port, host: 8888, guest: 8080, auto_correct: true 
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

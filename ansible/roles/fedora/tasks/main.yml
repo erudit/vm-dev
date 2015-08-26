@@ -23,7 +23,7 @@
 - name: Install Fedora-Commons
   command: /usr/bin/java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates=/var/lib/tomcat/fedora
   
-- name: Wait until the webapps is installed
+- name: Wait until the webapps are installed
   wait_for: path=/var/lib/tomcat/webapps/fedora/WEB-INF
 
 - name: Copy web.xml in the fedora-commons folder
