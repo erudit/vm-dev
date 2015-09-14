@@ -1,0 +1,15 @@
+---
+  - name: Add adobe repo
+    yum: name=http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm state=present
+
+  - name: Install flash-plugin package
+    yum : name=flash-plugin state=present
+
+  - name: Create common folder in tomcat root
+    file: path=/usr/share/tomcat/common state=directory
+
+  - name: Create symbolic link
+    file: src=/usr/share/tomcat/lib path=/usr/share/tomcat/common/lib state=link
+
+  - name: Download mysql-connection-java Redhat
+    get_url: url=http://mirrors.ibiblio.org/pub/mirrors/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar

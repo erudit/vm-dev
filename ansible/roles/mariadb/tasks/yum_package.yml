@@ -7,8 +7,6 @@
     - mariadb
     - mariadb-server
     - MySQL-python
-    - php-mysql
-    - php-pear
 
 - name: Start MariaDB service
   service: name=mariadb state=started enabled=yes

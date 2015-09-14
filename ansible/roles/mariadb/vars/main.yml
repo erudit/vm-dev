@@ -1,0 +1,5 @@
+---
+#Fedora-Commons configuration
+fedora_db_name: fedora
+fedora_db_user: fedoraAdmin
+fedora_db_password: fedoraAdmin

@@ -1,11 +1,12 @@
 ---
 
-- name: Create the fedora database
-  mysql_db: name="fedora"
-            state="present"
-
-- name: Create the fedora-commons user
-  mysql_user: name="fedoraAdmin"
-              password="fedoraAdmin"
+  - name: Create the fedora database
+    mysql_db: name="{{ fedora_db_name }}"
               state="present"
-              priv="fedora.*:ALL"
+
+  - name: Create the fedora-commons user
+    mysql_user: name="{{ fedora_db_user }}"
+                password="{{ fedora_db_password }}"
+                host="192.168.35.0/255.255.255.0"
+                state="present"
+                priv="fedora.*:ALL"

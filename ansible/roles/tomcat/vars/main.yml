@@ -2,3 +2,7 @@
 #Tomcat user and password
 admin_username: admin
 admin_password: admin
+
+#Tomcat Home
+tomcat_home_debian: /var/lib/tomcat7
+tomcat_home_redhat: /usr/share/tomcat

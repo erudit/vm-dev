@@ -9,14 +9,10 @@
 
 - name: Install MariaDB via apt
   apt: pkg={{ item }} update_cache=yes
-  with_items: 
-    - mariadb 
+  with_items:
+    - mariadb-client
     - mariadb-server
     - python-mysqldb
-    - php5-mysql
-    - php-pear
 
-- name: Start MariaDB service 
-  service : name=mysql state=started enabled=yes 
-  notify: restart mysql
-
+- name: Start MariaDB service
+  service : name=mysql state=started enabled=yes

@@ -7,42 +7,43 @@
 
 #Root password
 - name: Change the root password
-  mysql_user: user="root"
-              password="{{ mysql_root_password }}"
-              host="localhost"
+  mysql_user: user=root
+              host={{ item }}
+              password={{ mysql_root_password }}
+              login_user=root
+              login_password={{ mysql_root_password }}
+              check_implicit_admin=yes
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
 
-#Adding MariaDB configuration
-- name: Create MariaDB configuration file Debian/Ubuntu
-  template : src=myDebian.cnf.j2 dest=/etc/mysql/my.cnf
+# Adding MariaDB configuration
+- name: Copy .my.cnf to the root home directory
+  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
+
+- name: Modify my.cnf
+  lineinfile: dest=/etc/mysql/my.cnf regexp="^skip-external-locking" state=absent
   notify: restart mysql
-  when: ansible_os_family == 'Debian'
 
-- name: Create MariaDB configuration file RedHat/CentOS
-  template : src=myRedhat.cnf.j2 dest=/etc/my.cnf
-  notify: restart mariadb
-  when: ansible_os_family == 'RedHat'
-
-- name: Copy .my.cnf to the root home directory
-  copy: src=/etc/mysql/my.cnf dest=/root/.my.cnf
-  when: ansible_os_family == 'Debian'
-
-- name: Copy .my.cnf to the root home directory
-  copy: src=/etc/my.cnf dest=/root/.my.cnf
-  when: ansible_os_family == 'RedHat'
+- name: Modify my.cnf
+  lineinfile: dest=/etc/mysql/my.cnf regexp="^bind-address" state=absent
+  notify: restart mysql
 
 #Delete the useless code
 - name: Delete the anonymous sql server user
   mysql_user: user=""
-              state="absent"
+              host={{ ansible_hostname }}
+              state=absent
 
 - name: Delete the anonymous sql server user
   mysql_user: user=""
-              host="erudit-vm-dev"
-              state="absent"
-  
+              state=absent
+
 - name: Remove the MariaDB test database
-  mysql_db: name="test"
-            state="absent"
+  mysql_db: name=test
+            state=absent
 
 #Fedora-Commons configuration
 - include: fedora.yml

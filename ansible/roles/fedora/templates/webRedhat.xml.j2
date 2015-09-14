@@ -91,7 +91,7 @@
       <servlet-class>org.fcrepo.server.management.UploadServlet</servlet-class>
     </servlet>
     <servlet>
-      <display-name>Fedora User Servlet. Provides an XML representation of a 
+      <display-name>Fedora User Servlet. Provides an XML representation of a
     currently logged in user</display-name>
       <servlet-name>UserServlet</servlet-name>
       <servlet-class>org.fcrepo.server.security.jaas.UserServlet</servlet-class>
@@ -247,13 +247,13 @@
       <filter-name>AuthFilterJAAS</filter-name>
       <filter-class>org.fcrepo.server.security.jaas.AuthFilterJAAS</filter-class>
       <init-param>
-        <description>OPTIONAL. A comma separated list of class names for user principals. 
+        <description>OPTIONAL. A comma separated list of class names for user principals.
       First one that is found is effective only.</description>
         <param-name>userClassNames</param-name>
         <param-value>org.fcrepo.server.security.jaas.auth.UserPrincipal</param-value>
       </init-param>
       <init-param>
-        <description>True iff API-A requests via the REST API require authentication. 
+        <description>True iff API-A requests via the REST API require authentication.
       If not specified, defaults to true.</description>
         <param-name>authnAPIA</param-name>
         <param-value>false</param-value>
