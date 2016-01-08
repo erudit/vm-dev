@@ -3,10 +3,13 @@
 fedora_admin_password: fedoraAdmin
 
 #Database Configuration
-fedora_db_host: 192.168.35.12
+fedora_db_host: localhost
 fedora_db_name: fedora
 fedora_db_user: fedoraAdmin
 fedora_db_password: fedoraAdmin
 
 #Fedora configuration
 fedora_version: 3.4.2
+
+fedora_home_redhat: /usr/share/tomcat/fedora
+fedora_home_debian: /var/lib/tomcat7/fedora

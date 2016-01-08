@@ -9,7 +9,7 @@
     </listener>
     <context-param>
       <param-name>fedora.home</param-name>
-      <param-value>/var/lib/tomcat7/fedora</param-value>
+      <param-value>{{ fedora_home_debian }}</param-value>
     </context-param>
     <servlet>
       <display-name>Apache-Axis Servlet</display-name>
@@ -29,7 +29,7 @@
       <servlet-class>org.fcrepo.server.ServerController</servlet-class>
       <init-param>
         <param-name>fedora.home</param-name>
-        <param-value>/var/lib/tomcat7/fedora</param-value>
+        <param-value>{{ fedora_home_debian }}</param-value>
       </init-param>
       <load-on-startup>2</load-on-startup>
     </servlet>
