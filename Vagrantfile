@@ -12,18 +12,11 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  #config.vm.box = "Erudit/VM-dev"
   config.vm.hostname = "erudit-vm-dev"
-  
-  # Config pour Packer
+
+  # Packer configuration
   config.vm.box = "centos 7.0"
   config.vm.box_url = "./centos-7.0.box"
-  
-  #TMP hashicorp box until we have some
-  #Ubuntu base box
-  #config.vm.box = "ubuntu/vivid64" 
-  #Debian base box
-  #config.vm.box = "debian/jessie64"
 
   # Shared/Synced folder
   config.vm.synced_folder "share/", "/mnt/share"
@@ -31,15 +24,13 @@ Vagrant.configure(2) do |config|
   shared_dir = "/vagrant"
 
   #Ansible configuration script
-  #/tmp configuration until we have some ubuntu or debian box
-  #config.vm.provision :shell, path: "scripts/ansible/ansible.sh", args: shared_dir
   config.vm.provision :shell, path: "scripts/ansible/init.sh", privileged: false, args: shared_dir
 
 
   #Port mapping and forwarding
   config.vm.network :forwarded_port, host: 4567, guest: 80, auto_correct: true
-  config.vm.network :forwarded_port, host: 8888, guest: 8080, auto_correct: true 
-  
+  config.vm.network :forwarded_port, host: 8888, guest: 8080, auto_correct: true
+
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -48,7 +39,7 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.10.150"
-   
+
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
@@ -61,14 +52,14 @@ Vagrant.configure(2) do |config|
    config.vm.provider "virtualbox" do |vb|
    # Display the VirtualBox GUI when booting the machine
      vb.gui = true
-  
+
    # Customize the amount of memory on the VM:
      vb.memory = "4096"
      vb.cpus = "3"
 
    # Birectionnal clipboard and drag'n'drop
-     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
-     vb.customize ['modifyvm', :id, '--draganddrop', 'bidirectional']  
+     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
+     vb.customize ['modifyvm', :id, '--draganddrop', 'bidirectional']
    end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
