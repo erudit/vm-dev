@@ -12,4 +12,4 @@
     file: src=/usr/share/tomcat/lib path=/usr/share/tomcat/common/lib state=link
 
   - name: Download mysql-connection-java Redhat
-    get_url: url=http://mirrors.ibiblio.org/pub/mirrors/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
+    get_url: url=http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
