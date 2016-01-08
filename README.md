@@ -10,7 +10,7 @@ Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
 
 1. `git clone https://github.com/erudit/vm-dev.git`
 2. `cd vm-dev`
-3. `vagrant up`
+3. `make`
 
 You can use the GUI or you can also shell into the machine with `vagrant ssh`
 
@@ -28,7 +28,7 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
   * Solr 4.10.3
   * Eclipse Mars
 
-## Base Commands
+## Basic Commands
 
 - vagrant up
   - Start the VM
