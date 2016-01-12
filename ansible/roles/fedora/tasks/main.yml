@@ -1,48 +1,55 @@
 ---
-  - include: yum_package.yml
-    when: ansible_os_family == 'RedHat'
-  - include: apt_package.yml
-    when: ansible_os_family == 'Debian'
+- include: yum_package.yml
+  when: ansible_os_family == 'RedHat'
+- include: apt_package.yml
+  when: ansible_os_family == 'Debian'
 
-  - name: Download Fedora-Commons source
-    get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar
+- name: Download Fedora-Commons source
+  get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar
 
-  - name: Copy install.properties
-    template: src=install.propertiesRedHat.j2 dest=/tmp/install.properties
-    when: ansible_os_family == "RedHat"
+- name: Copy install.properties
+  template: src=install.propertiesRedHat.j2 dest=/tmp/install.properties
+  when: ansible_os_family == "RedHat"
 
-  - name: Copy install.properties
-    template: src=install.propertiesDebian.j2 dest=/tmp/install.properties
-    when: ansible_os_family == "Debian"
+- name: Copy install.properties
+  template: src=install.propertiesDebian.j2 dest=/tmp/install.properties
+  when: ansible_os_family == "Debian"
 
-  - name: Install Fedora-Commons
-    command: /usr/bin/java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates=/var/lib/tomcat/fedora
-    when: ansible_os_family == "RedHat"
+- name: Install Fedora-Commons
+  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home_redhat }}/fedora
+  when: ansible_os_family == "RedHat"
 
-  - name: Install Fedora-Commons
-    command: /usr/bin/java -jar /vagrant/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates=/var/lib/tomcat7/fedora
-    when: ansible_os_family == "Debian"
+- name: Install Fedora-Commons
+  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home_debian }}/fedora
+  when: ansible_os_family == "Debian"
 
-  - name: Wait until the webapps are installed Redhat
-    wait_for: path={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF
-    when: ansible_os_family == "RedHat"
+- name: Wait until the webapps are installed Redhat
+  wait_for: path={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF
+  when: ansible_os_family == "RedHat"
 
-  - name: Wait until the webapps are installed Debian
-    wait_for: path={{ tomcat_home_debian }}/webapps/fedora/WEB-INF
-    when: ansible_os_family == "Debian"
+- name: Wait until the webapps are installed Debian
+  wait_for: path={{ tomcat_home_debian }}/webapps/fedora/WEB-INF
+  when: ansible_os_family == "Debian"
 
-  - name: Copy web.xml in the fedora-commons folder
-    template: src=webRedhat.xml.j2 dest={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF/web.xml
-    notify:
+- name: Add FEDORA_HOME variable in /etc/environment
+  lineinfile:
+    dest: /etc/environment
+    line: "FEDORA_HOME={{ fedora_home_redhat }}"
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Copy web.xml in the fedora-commons folder
+  template: src=webRedhat.xml.j2 dest={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF/web.xml
+  notify:
     - change fedora ownership redhat
     - change tomcat ownership redhat
     - restart tomcat
-    when: ansible_os_family == "RedHat"
+  when: ansible_os_family == "RedHat"
 
-  - name: Copy web.xml in the fedora-commons folder
-    template: src=webDebian.xml.j2 dest={{ tomcat_home_debian }}/webapps/fedora/WEB-INF/web.xml
-    notify:
+- name: Copy web.xml in the fedora-commons folder
+  template: src=webDebian.xml.j2 dest={{ tomcat_home_debian }}/webapps/fedora/WEB-INF/web.xml
+  notify:
     - change fedora ownership debian
     - change tomcat ownership debian
     - restart tomcat7
-    when: ansible_os_family == "Debian"
+  when: ansible_os_family == "Debian"

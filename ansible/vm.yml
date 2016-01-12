@@ -8,7 +8,5 @@
     - common
     - mariadb
     - tomcat
-    - apache
     - fedora
     - solr
-    - eclipse

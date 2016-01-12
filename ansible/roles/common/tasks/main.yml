@@ -1,3 +1,6 @@
 ---
+- include: yum_package.yml
+  when: ansible_os_family == 'RedHat'
+
 - name: Create download directory
-  file: path=/vagrant/downloads/ state=directory 
+  file: path=/home/vagrant/sync/downloads/ state=directory
