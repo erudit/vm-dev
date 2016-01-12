@@ -15,16 +15,21 @@ You can shell into the machine with `vagrant ssh`
 
 ## Environnement
 
-* CentOs 7
+**CentOs 7**
+
+* Once the vm has started
   * Tomcat 7.0.54
+    * [Tomcat](http://192.168.10.150:8080/)
     * Manager username: admin password: admin
   * Mariadb
     * Username: root Password: root
     * Database: fedora
       * Username: fedoraAdmin Password: fedoraAdmin
   * Fedora-Commons 3.4.2
+    * [Fedora](http://192.168.10.150:8080/fedora)
     * Username: fedoraAdmin Password: fedoraAdmin
   * Solr 4.10.3
+    * [Solr](http://192.168.10.150:8080/solr)
 
 ## Basic Commands
 
