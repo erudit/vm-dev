@@ -1,8 +1,7 @@
 # Developer's VM
-Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
+Development environment for developers (Tomcat : Fedora-Commons, Solr)
 
 ## Requirements
-* [Packer](https://packer.io/) (Only for .box creation)
 * [Vagrant](https://www.vagrantup.com/)
 * [VirtualBox](https://www.virtualbox.org/)
 
@@ -10,9 +9,9 @@ Development environment for developers (Tomcat : Fedora-Commons, Solr, Cocoon)
 
 1. `git clone https://github.com/erudit/vm-dev.git`
 2. `cd vm-dev`
-3. `make`
+3. `vagrant up`
 
-You can use the GUI or you can also shell into the machine with `vagrant ssh`
+You can shell into the machine with `vagrant ssh`
 
 ## Environnement
 
@@ -26,7 +25,6 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
   * Fedora-Commons 3.4.2
     * Username: fedoraAdmin Password: fedoraAdmin
   * Solr 4.10.3
-  * Eclipse Mars
 
 ## Basic Commands
 
