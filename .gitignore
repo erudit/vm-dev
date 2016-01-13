@@ -1,8 +1,3 @@
 #folder
-packer_cache/
 downloads/
 .vagrant/
-
-#files
-*.box
-*.iso

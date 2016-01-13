@@ -20,18 +20,11 @@
 - name: Copy install.properties
   template: src=install.properties.j2 dest=/tmp/install.properties
 
-# - name: Add FEDORA_HOME variable in /etc/environment
-#   lineinfile:
-#     dest: /etc/environment
-#     line: "FEDORA_HOME={{ fedora_home }}"
-#     state: present
-
 - name: Install Fedora-Commons
   command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home }}/fedora
   notify:
     - change fedora ownership
     - change tomcat ownership
-    - restart tomcat
 
 - name: Wait until the webapps are installed
   wait_for: path={{ tomcat_home }}/webapps/fedora/WEB-INF
