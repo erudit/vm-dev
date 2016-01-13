@@ -1,6 +1,24 @@
 ---
-- include: yum_package.yml
-  when: ansible_os_family == 'RedHat'
-
 - name: Create download directory
   file: path=/home/vagrant/sync/downloads/ state=directory
+
+- name: Install useful package
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - vim
+    - bash-completion
+    - tcpdump
+    - git
+    - sudo
+    - python-keyczar
+    - unzip
+    - htop
+    - wget
+
+- name: Stop firewalld service
+  service:
+    name: firewalld
+    state: stopped

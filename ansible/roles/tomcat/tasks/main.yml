@@ -1,36 +1,22 @@
 ---
-#Install and start Tomcat
-- include: yum_package.yml
-  when: ansible_os_family == 'RedHat'
-- include: apt_package.yml
-  when: ansible_os_family == 'Debian'
+- name: Install Tomcat via yum
+  yum: pkg={{item}}
+  with_items:
+    - tomcat
+    - tomcat-webapps
+    - tomcat-admin-webapps
 
-#RedHat/CentOS Tomcat 7 Configuration
+- name: Start tomcat
+  service: name=tomcat state=started enabled=yes
+
 - name: Configure Tomcat server
   template: src=server.xml.j2 dest=/usr/share/tomcat/conf/server.xml owner=tomcat group=tomcat
-  notify: 
+  notify:
     - restart tomcat
-    - change tomcat ownership redhat
-  when: ansible_os_family == 'RedHat'
+    - change tomcat ownership
 
 - name: Configure Tomcat user
   template: src=tomcat-users.xml.j2 dest=/usr/share/tomcat/conf/tomcat-users.xml owner=tomcat group=tomcat
-  notify: 
+  notify:
     - restart tomcat
-    - change tomcat ownership redhat
-  when: ansible_os_family == 'RedHat'
-
-#Debian/Ubuntu Tomcat 7 Configuration
-- name: Configure Tomcat server
-  template: src=server.xml.j2 dest=/etc/tomcat7/server.xml owner=tomcat group=tomcat
-  notify: 
-    - restart tomcat7
-    - change tomcat ownership debian
-  when: ansible_os_family == 'Debian'
-
-- name: Configure Tomcat user
-  template: src=tomcat-users.xml.j2 dest=/etc/tomcat7/tomcat-users.xml owner=tomcat group=tomcat
-  notify: 
-    - restart tomcat7
-    - change tomcat ownership debian
-  when: ansible_os_family == 'Debian'
+    - change tomcat ownership

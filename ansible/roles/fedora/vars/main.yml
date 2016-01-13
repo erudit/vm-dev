@@ -10,5 +10,4 @@ fedora_db_password: fedoraAdmin
 
 #Fedora configuration
 fedora_version: 3.4.2
-fedora_home_redhat: "{{ tomcat_home_redhat }}/fedora"
-fedora_home_debian: "{{ tomcat_home_debian }}/fedora"
+fedora_home: "{{ tomcat_home }}/fedora"

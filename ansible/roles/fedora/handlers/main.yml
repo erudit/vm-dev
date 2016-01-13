@@ -1,6 +1,3 @@
 ---
-- name: change fedora ownership redhat
-  file: path={{ tomcat_home_redhat }} owner=tomcat group=tomcat state=directory recurse=yes
-
-- name: change fedora ownership debian
-  file: path={{ tomcat_home_debian }} owner=tomcat7 group=tomcat7 state=directory recurse=yes
+- name: change fedora ownership
+  file: path={{ tomcat_home }} owner=tomcat group=tomcat state=directory recurse=yes

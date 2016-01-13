@@ -1,55 +1,44 @@
 ---
-- include: yum_package.yml
-  when: ansible_os_family == 'RedHat'
-- include: apt_package.yml
-  when: ansible_os_family == 'Debian'
+- name: Add adobe repo
+  yum: name=http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm state=present
+
+- name: Install flash-plugin package
+  yum : name=flash-plugin state=present
+
+- name: Create common folder in tomcat root
+  file: path=/usr/share/tomcat/common state=directory
+
+- name: Create symbolic link
+  file: src=/usr/share/tomcat/lib path=/usr/share/tomcat/common/lib state=link
+
+- name: Download mysql-connection-java
+  get_url: url=http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
 
 - name: Download Fedora-Commons source
   get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar
 
 - name: Copy install.properties
-  template: src=install.propertiesRedHat.j2 dest=/tmp/install.properties
-  when: ansible_os_family == "RedHat"
+  template: src=install.properties.j2 dest=/tmp/install.properties
 
-- name: Copy install.properties
-  template: src=install.propertiesDebian.j2 dest=/tmp/install.properties
-  when: ansible_os_family == "Debian"
-
-- name: Install Fedora-Commons
-  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home_redhat }}/fedora
-  when: ansible_os_family == "RedHat"
+# - name: Add FEDORA_HOME variable in /etc/environment
+#   lineinfile:
+#     dest: /etc/environment
+#     line: "FEDORA_HOME={{ fedora_home }}"
+#     state: present
 
 - name: Install Fedora-Commons
-  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home_debian }}/fedora
-  when: ansible_os_family == "Debian"
-
-- name: Wait until the webapps are installed Redhat
-  wait_for: path={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF
-  when: ansible_os_family == "RedHat"
-
-- name: Wait until the webapps are installed Debian
-  wait_for: path={{ tomcat_home_debian }}/webapps/fedora/WEB-INF
-  when: ansible_os_family == "Debian"
-
-- name: Add FEDORA_HOME variable in /etc/environment
-  lineinfile:
-    dest: /etc/environment
-    line: "FEDORA_HOME={{ fedora_home_redhat }}"
-    state: present
-  when: ansible_os_family == "RedHat"
-
-- name: Copy web.xml in the fedora-commons folder
-  template: src=webRedhat.xml.j2 dest={{ tomcat_home_redhat }}/webapps/fedora/WEB-INF/web.xml
+  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home }}/fedora
   notify:
-    - change fedora ownership redhat
-    - change tomcat ownership redhat
+    - change fedora ownership
+    - change tomcat ownership
     - restart tomcat
-  when: ansible_os_family == "RedHat"
+
+- name: Wait until the webapps are installed
+  wait_for: path={{ tomcat_home }}/webapps/fedora/WEB-INF
 
 - name: Copy web.xml in the fedora-commons folder
-  template: src=webDebian.xml.j2 dest={{ tomcat_home_debian }}/webapps/fedora/WEB-INF/web.xml
+  template: src=web.xml.j2 dest={{ tomcat_home }}/webapps/fedora/WEB-INF/web.xml
   notify:
-    - change fedora ownership debian
-    - change tomcat ownership debian
-    - restart tomcat7
-  when: ansible_os_family == "Debian"
+    - change fedora ownership
+    - change tomcat ownership
+    - restart tomcat

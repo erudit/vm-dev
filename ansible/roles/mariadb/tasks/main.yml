@@ -1,9 +1,12 @@
----
-#Install and start MariaDB
-- include: apt_package.yml
-  when: ansible_os_family == 'Debian'
-- include: yum_package.yml
-  when: ansible_os_family == 'RedHat'
+- name: Install MariaDB via yum
+  yum: pkg={{ item }}
+  with_items:
+    - mariadb
+    - mariadb-server
+    - MySQL-python
+
+- name: Start MariaDB service
+  service: name=mariadb state=started enabled=yes
 
 #Root password
 - name: Change the root password
@@ -25,11 +28,11 @@
 
 - name: Modify my.cnf
   lineinfile: dest=/etc/mysql/my.cnf regexp="^skip-external-locking" state=absent
-  notify: restart mysql
+  notify: restart mariadb
 
 - name: Modify my.cnf
   lineinfile: dest=/etc/mysql/my.cnf regexp="^bind-address" state=absent
-  notify: restart mysql
+  notify: restart mariadb
 
 #Delete the useless code
 - name: Delete the anonymous sql server user
