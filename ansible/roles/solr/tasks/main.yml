@@ -1,30 +1,48 @@
 ---
 - name: Downloading SOLR
-  get_url: url=http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz dest=/home/vagrant/sync/solr-{{ solr_version }}.tgz
+  get_url:
+    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
+    dest: /home/vagrant/sync/solr-{{ solr_version }}.tgz
 
 - name: Extracting SOLR
-  unarchive: src=/home/vagrant/sync/solr-{{ solr_version }}.tgz dest=/tmp creates
+  unarchive:
+    src: /home/vagrant/sync/solr-{{ solr_version }}.tgz
+    dest: /tmp
+    creates: yes
 
 - name: Installing the SOLR webapps
-  copy: src=/tmp/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war dest={{ tomcat_home }}/webapps/solr.war owner=tomcat group=tomcat
+  copy:
+    src: /tmp/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war
+    dest: "{{ tomcat_home }}/webapps/solr.war"
+    owner: tomcat
+    group: tomcat
 
 - name: Downloading commons-logging
-  get_url: url=http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar dest=/home/vagrant/sync/commons-logging-1.1.2.jar
+  get_url:
+    url: http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar
+    dest: /home/vagrant/sync/commons-logging-1.1.2.jar
 
 - name: Copy commons-logging libs in the Tomcat folder
-  copy: src=/home/vagrant/sync/commons-logging-1.1.2.jar dest={{ tomcat_home }}/lib/commons-logging-1.1.2.jar owner=tomcat group=tomcat
+  copy:
+    src: /home/vagrant/sync/commons-logging-1.1.2.jar
+    dest: "{{ tomcat_home }}/lib/commons-logging-1.1.2.jar"
 
 - name: Copy log4j libs in the Tomcat folder
-  copy: src=/tmp/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar dest={{ tomcat_home }}/lib/log4j-1.2.17.jar owner=tomcat group=tomcat
+  copy:
+    src: /tmp/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar
+    dest: "{{ tomcat_home }}/lib/log4j-1.2.17.jar"
 
 - name: Copy slf4j libs in the Tomcat folder
-  copy: src=/tmp/solr-{{ solr_version }}/example/lib/ext/{{item}} dest={{ tomcat_home }}/lib/{{item}} owner=tomcat group=tomcat
+  copy:
+    src: /tmp/solr-{{ solr_version }}/example/lib/ext/{{ item }}
+    dest: "{{ tomcat_home }}/lib/{{ item }}"
   with_items:
     - slf4j-api-1.7.6.jar
     - slf4j-log4j12-1.7.6.jar
 
 - name: stat SOLR folder
-  stat: path={{ solr_home }}
+  stat:
+    path: "{{ solr_home }}"
   register: solr_stat
 
 - name: Installing SOLR
@@ -32,11 +50,15 @@
   when: solr_stat.stat.exists == false
 
 - name: Copying the schema.xml template
-  template: src=/home/vagrant/sync/ansible/roles/solr/templates/schema.xml.j2 dest={{ solr_home }}/collection1/conf/schema.xml
+  template:
+    src: /home/vagrant/sync/ansible/roles/solr/templates/schema.xml.j2
+    dest: "{{ solr_home }}/collection1/conf/schema.xml"
   notify:
-  - change ownership solr
+    - change ownership solr
 
 - name: Copying the solr.xml template
-  template: src=/home/vagrant/sync/ansible/roles/solr/templates/solr.xml.j2 dest={{ tomcat_home }}/conf/Catalina/localhost/solr.xml
+  template:
+    src: /home/vagrant/sync/ansible/roles/solr/templates/solr.xml.j2
+    dest: "{{ tomcat_home }}/conf/Catalina/localhost/solr.xml"
   notify:
     - restart tomcat

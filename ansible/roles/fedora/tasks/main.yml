@@ -1,36 +1,56 @@
 ---
 - name: Add adobe repo
-  yum: name=http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm state=present
+  yum:
+    name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
+    state: present
 
 - name: Install flash-plugin package
-  yum : name=flash-plugin state=present
+  yum:
+    name: flash-plugin
+    state: present
 
 - name: Create common folder in tomcat root
-  file: path=/usr/share/tomcat/common state=directory
+  file:
+    path: /usr/share/tomcat/common
+    state: directory
 
 - name: Create symbolic link
-  file: src=/usr/share/tomcat/lib path=/usr/share/tomcat/common/lib state=link
+  file:
+    src: /usr/share/tomcat/lib
+    path: /usr/share/tomcat/common/lib
+    state: link
 
 - name: Download mysql-connection-java
-  get_url: url=http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar dest=/usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
+  get_url:
+    url: http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
+    dest: /usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
 
 - name: Download Fedora-Commons source
-  get_url: url=http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar dest=/home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar
+  get_url:
+    url: http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar
+    dest: /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar
 
 - name: Copy install.properties
-  template: src=install.properties.j2 dest=/tmp/install.properties
+  template:
+    src: install.properties.j2
+    dest: /tmp/install.properties
 
 - name: Install Fedora-Commons
-  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties creates={{ tomcat_home }}/fedora
+  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
+  args:
+    creates: "{{ tomcat_home }}/fedora"
   notify:
     - change fedora ownership
     - change tomcat ownership
 
 - name: Wait until the webapps are installed
-  wait_for: path={{ tomcat_home }}/webapps/fedora/WEB-INF
+  wait_for:
+    path: "{{ tomcat_home }}/webapps/fedora/WEB-INF"
 
 - name: Copy web.xml in the fedora-commons folder
-  template: src=web.xml.j2 dest={{ tomcat_home }}/webapps/fedora/WEB-INF/web.xml
+  template:
+    src: web.xml.j2
+    dest: "{{ tomcat_home }}/webapps/fedora/WEB-INF/web.xml"
   notify:
     - change fedora ownership
     - change tomcat ownership

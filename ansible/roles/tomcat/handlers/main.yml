@@ -1,6 +1,14 @@
 ---
 - name: restart tomcat
-  service: name=tomcat state=restarted
+  service:
+    name: tomcat
+    state: restarted
+    enabled: yes
 
 - name: change tomcat ownership
-  file: path=/usr/share/tomcat owner=tomcat group=tomcat state=directory recurse=yes
+  file:
+    path: "{{ tomcat_home }}"
+    owner: tomcat
+    group: tomcat
+    state: directory
+    recurse: yes
