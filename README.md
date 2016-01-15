@@ -21,6 +21,7 @@ You can shell into the machine with `vagrant ssh`
   * Tomcat 7.0.54
     * [Tomcat](http://192.168.10.150:8080/)
     * Manager username: admin password: admin
+    * Location: /usr/share/tomcat
   * Mariadb
     * Username: root Password: root
     * Database: fedora
@@ -28,8 +29,10 @@ You can shell into the machine with `vagrant ssh`
   * Fedora-Commons 3.4.2
     * [Fedora](http://192.168.10.150:8080/fedora)
     * Username: fedoraAdmin Password: fedoraAdmin
+    * Location: /usr/share/tomcat/fedora
   * Solr 4.10.3
     * [Solr](http://192.168.10.150:8080/solr)
+    * Location: /usr/share/tomcat/solr
 
 ## Basic Commands
 
