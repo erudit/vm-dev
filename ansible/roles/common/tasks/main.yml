@@ -22,3 +22,14 @@
   service:
     name: firewalld
     state: stopped
+
+- name: Add repository
+  yum:
+    name: http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-1-13.rhel6.noarch.rpm
+    state: present
+
+- name: Install latest libcurl package
+  yum:
+    name: libcurl
+    state: latest
+    update_cache: yes
