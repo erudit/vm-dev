@@ -2,11 +2,11 @@
 - name: Downloading SOLR
   get_url:
     url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
-    dest: /home/vagrant/sync/solr-{{ solr_version }}.tgz
+    dest: /home/vagrant/sync/downloads/solr-{{ solr_version }}.tgz
 
 - name: Extracting SOLR
   unarchive:
-    src: /home/vagrant/sync/solr-{{ solr_version }}.tgz
+    src: /home/vagrant/sync/downloads/solr-{{ solr_version }}.tgz
     dest: /tmp
     creates: yes
 
@@ -20,11 +20,11 @@
 - name: Downloading commons-logging
   get_url:
     url: http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar
-    dest: /home/vagrant/sync/commons-logging-1.1.2.jar
+    dest: /home/vagrant/sync/downloads/commons-logging-1.1.2.jar
 
 - name: Copy commons-logging libs in the Tomcat folder
   copy:
-    src: /home/vagrant/sync/commons-logging-1.1.2.jar
+    src: /home/vagrant/sync/downloads/commons-logging-1.1.2.jar
     dest: "{{ tomcat_home }}/lib/commons-logging-1.1.2.jar"
 
 - name: Copy log4j libs in the Tomcat folder

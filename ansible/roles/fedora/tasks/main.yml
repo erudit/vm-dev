@@ -28,7 +28,7 @@
 - name: Download Fedora-Commons source
   get_url:
     url: http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar
-    dest: /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar
+    dest: /home/vagrant/sync/downloads/fcrepo-installer-{{ fedora_version }}.jar
 
 - name: Copy install.properties
   template:
@@ -36,7 +36,7 @@
     dest: /tmp/install.properties
 
 - name: Install Fedora-Commons
-  command: /usr/bin/java -jar /home/vagrant/sync/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
+  command: /usr/bin/java -jar /home/vagrant/sync/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
   args:
     creates: "{{ tomcat_home }}/fedora"
   notify:
