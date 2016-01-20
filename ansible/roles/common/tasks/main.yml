@@ -28,8 +28,20 @@
     name: http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-1-13.rhel6.noarch.rpm
     state: present
 
-- name: Install latest libcurl package
+- name: Install latest package
   yum:
-    name: libcurl
+    name: "{{ item}}"
     state: latest
     update_cache: yes
+  with_items:
+    - libcurl
+    - nss
+
+- name: Copy gitlab certificate
+  copy:
+    src: gitlab.erudit.team.crt
+    dest: /etc/pki/ca-trust/source/anchors/gitlab.erudit.team.crt
+    owner: root
+    group: root
+  notify:
+    - update certificate
