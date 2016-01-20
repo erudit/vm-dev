@@ -41,13 +41,15 @@ You can shell into the machine with `vagrant ssh`
 - vagrant halt
   - Stop the VM
 - vagrant provision
-  - Run any configured provisioner configured in the Vagrantfile
+  - Run any configured provisioner in the Vagrantfile
 - vagrant suspend
-  - Stop the VM and save state
+  - Stop the VM and save the state
 - vagrant ssh
-  - Ssh into the running Vagrant machine
+  - SSH into the running Vagrant machine
 - vagrant destroy
   - Stop the VM and delete all traces
+- vagrant rsync-auto
+  - Watch any defined rsync folders and automatically sync them
 
 
 ## Windows User
