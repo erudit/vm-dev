@@ -32,14 +32,6 @@
     src: /tmp/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar
     dest: "{{ tomcat_home }}/lib/log4j-1.2.17.jar"
 
-- name: Copy slf4j libs in the Tomcat folder
-  copy:
-    src: /tmp/solr-{{ solr_version }}/example/lib/ext/{{ item }}
-    dest: "{{ tomcat_home }}/lib/{{ item }}"
-  with_items:
-    - slf4j-api-1.7.6.jar
-    - slf4j-log4j12-1.7.6.jar
-
 - name: stat SOLR folder
   stat:
     path: "{{ solr_home }}"
@@ -61,4 +53,36 @@
     src: /home/vagrant/sync/ansible/roles/solr/templates/solr.xml.j2
     dest: "{{ tomcat_home }}/conf/Catalina/localhost/solr.xml"
   notify:
+    - restart tomcat
+
+
+- name: Copy contrib folder in solr home
+  copy:
+    src: /tmp/solr-{{ solr_version }}/contrib
+    dest: "{{ solr_home }}/contrib"
+    owner: tomcat
+    group: tomcat
+
+- name: Copy dist folder in solr home
+  copy:
+    src: /tmp/solr-{{ solr_version }}/dist
+    dest: "{{ solr_home }}/dist"
+    owner: tomcat
+    group: tomcat
+
+- meta: flush_handlers
+
+- name: Wait for WEB-INF/lib folder
+  wait_for:
+    path: "{{ tomcat_home }}/webapps/solr/WEB-INF/lib"
+
+- name: Copy slf4j libs in the Tomcat folder
+  copy:
+    src: /tmp/solr-{{ solr_version }}/example/lib/ext/{{ item }}
+    dest: "{{ tomcat_home }}/webapps/solr/WEB-INF/lib/{{ item }}"
+  with_items:
+    - slf4j-api-1.7.6.jar
+    - slf4j-log4j12-1.7.6.jar
+  notify:
+    - change ownership solr
     - restart tomcat
