@@ -47,9 +47,6 @@ Vagrant.configure(2) do |config|
      vb.memory = "3072"
      vb.cpus = "2"
 
-   # Birectionnal clipboard and drag'n'drop
-     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
-     vb.customize ['modifyvm', :id, '--draganddrop', 'bidirectional']
    end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
