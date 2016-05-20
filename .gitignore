@@ -1,2 +1,5 @@
 #folder
 .vagrant/
+
+#files
+*.sw?

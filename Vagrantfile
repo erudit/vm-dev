@@ -46,7 +46,6 @@ Vagrant.configure(2) do |config|
    # Customize the amount of memory on the VM:
      vb.memory = "3072"
      vb.cpus = "2"
-
    end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
