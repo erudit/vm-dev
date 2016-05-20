@@ -2,7 +2,7 @@
 - name: Install Apache, MariaDB, Tomcat, Fedora-Commons, Solr
   hosts: vm-dev
   remote_user: vagrant
-  sudo: yes
+  become: yes
 
   roles:
     - common
