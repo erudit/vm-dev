@@ -58,3 +58,5 @@ If you want to use **vagrant ssh** you will need git or cygwin.
 
   * [Git](https://git-scm.com/downloads)
   * [Cygwin](https://cygwin.com/install.html)
+
+Also, install the rsync package within cygwin.
