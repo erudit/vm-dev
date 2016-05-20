@@ -16,6 +16,7 @@
     - unzip
     - htop
     - wget
+    - tmux
 
 - name: Stop firewalld service
   service:
