@@ -1,7 +1,7 @@
 ---
 - name: change fedora ownership
   file:
-    path: "{{ tomcat_home }}" 
+    path: "{{ fedora_home }}" 
     owner: tomcat
     group: tomcat
     state: directory
