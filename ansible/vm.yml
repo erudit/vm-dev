@@ -9,4 +9,5 @@
     - mariadb
     - tomcat
     - fedora
+      fedora_url: "http://synweb.cen.umontreal.ca/vm-dev/fcrepo-installer-3.4.2.jar"
     - solr
