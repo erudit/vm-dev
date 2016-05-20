@@ -10,15 +10,11 @@
     path: /usr/share/tomcat/common/lib
     state: link
 
-- name: Download mysql-connection-java
-  get_url:
-    url: http://central.maven.org/maven2/mysql/mysql-connector-java/5.1.6/mysql-connector-java-5.1.6.jar
-    dest: /usr/share/tomcat/lib/mysql-connector-java-5.1.6.jar
-
 - name: Download Fedora-Commons source
   get_url:
-    url: http://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar
+    url: "{{ fedora_url }}"
     dest: /home/vagrant/sync/downloads/fcrepo-installer-{{ fedora_version }}.jar
+    md5sum: "{{ fedora_md5sum }}"
 
 - name: Copy install.properties
   template:
