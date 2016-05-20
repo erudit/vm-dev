@@ -28,7 +28,7 @@
     name: http://www.city-fan.org/ftp/contrib/yum-repo/city-fan.org-release-1-13.rhel6.noarch.rpm
     state: present
 
-- name: Install latest package
+- name: Install latest package from city-fan
   yum:
     name: "{{ item}}"
     state: latest
