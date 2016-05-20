@@ -10,6 +10,11 @@
     path: /usr/share/tomcat/common/lib
     state: link
 
+- name: install mysql-connector-java
+  package:
+    name: mysql-connector-java
+    state: present
+
 - name: Download Fedora-Commons source
   get_url:
     url: "{{ fedora_url }}"
