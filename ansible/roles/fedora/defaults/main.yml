@@ -1,0 +1,15 @@
+---
+#fedoraAdmin configuration
+fedora_admin_password: fedoraAdmin
+
+#Database Configuration
+fedora_db_host: localhost
+fedora_db_name: fedora
+fedora_db_user: fedoraAdmin
+fedora_db_password: fedoraAdmin
+
+#Fedora configuration
+fedora_version: 3.4.2
+fedora_home: "{{ tomcat_home }}/fedora"
+fedora_url: "https://sourceforge.net/projects/fedora-commons/files/fedora/{{ fedora_version }}/fcrepo-installer-{{ fedora_version }}.jar"
+fedora_md5sum: 50babf14fee72a11a72f52fae73bc2db
