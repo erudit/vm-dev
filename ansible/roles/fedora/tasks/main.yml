@@ -1,14 +1,4 @@
 ---
-- name: Add adobe repo
-  yum:
-    name: http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
-    state: present
-
-- name: Install flash-plugin package
-  yum:
-    name: flash-plugin
-    state: present
-
 - name: Create common folder in tomcat root
   file:
     path: /usr/share/tomcat/common
