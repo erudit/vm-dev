@@ -1,8 +1,9 @@
 ---
 - name: Downloading SOLR
   get_url:
-    url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
+    url: "{{ solr_url }}"
     dest: /home/vagrant/sync/downloads/solr-{{ solr_version }}.tgz
+    checksum: "sha1:{{ solr_sha1sum }}"
 
 - name: Extracting SOLR
   unarchive:
@@ -20,12 +21,8 @@
 - name: Downloading commons-logging
   get_url:
     url: http://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.2/commons-logging-1.1.2.jar
-    dest: /home/vagrant/sync/downloads/commons-logging-1.1.2.jar
-
-- name: Copy commons-logging libs in the Tomcat folder
-  copy:
-    src: /home/vagrant/sync/downloads/commons-logging-1.1.2.jar
-    dest: "{{ tomcat_home }}/lib/commons-logging-1.1.2.jar"
+    dest: "{{ tomcat_home }}/lib/"
+    checksum: "sha1:3b2888239ebec822dff8ed7ebf96293302e4b23b"
 
 - name: Copy log4j libs in the Tomcat folder
   copy:
@@ -36,6 +33,7 @@
   stat:
     path: "{{ solr_home }}"
   register: solr_stat
+  always_run: true
 
 - name: Installing SOLR
   command: cp -r /tmp/solr-{{ solr_version }}/example/solr {{ solr_home }}
@@ -54,7 +52,6 @@
     dest: "{{ tomcat_home }}/conf/Catalina/localhost/solr.xml"
   notify:
     - restart tomcat
-
 
 - name: Copy contrib folder in solr home
   copy:

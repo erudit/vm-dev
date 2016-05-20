@@ -1,3 +1,5 @@
 ---
 solr_version: 4.10.3
 solr_home: /usr/share/tomcat/solr
+solr_url: "http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
+solr_sha1sum: 3c6f5a71864b691b72b13a4deb3fb52cd8fdfc3f
