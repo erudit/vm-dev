@@ -15,10 +15,11 @@ Vagrant.configure(2) do |config|
   config.vm.hostname = "vm-dev"
   config.vm.box = "centos/7"
 
-  shared_dir = "/home/vagrant/sync"
+  config.vm.synced_folder ".", "/vagrant", disabled: "true"
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
 
   #Ansible configuration script
-  config.vm.provision :shell, path: "scripts/ansible/init.sh", privileged: false, args: shared_dir
+  config.vm.provision :shell, path: "scripts/ansible/init.sh", privileged: false, args: '/vagrant'
 
   #Port mapping and forwarding
   #config.vm.network :forwarded_port, guest: 8080, host: 8181, auto_correct: true
