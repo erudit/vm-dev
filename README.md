@@ -49,6 +49,7 @@ You can shell into the machine with `vagrant ssh`.
 | `vagrant suspend`    | Stop the VM and save the state                          |
 | `vagrant ssh`        | SSH into the running Vagrant machine                    |
 | `vagrant destroy`    | Stop the VM and delete all traces                       |
+| `vagrant rsync`      | Sync defined rsync folders                              |
 | `vagrant rsync-auto` | Watch defined rsync folders and automatically sync them |
 
 
