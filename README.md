@@ -7,6 +7,15 @@ Development environment with Tomcat (Fedora-Commons & Solr).
 * [Vagrant](https://www.vagrantup.com/)
 * [VirtualBox](https://www.virtualbox.org/)
 
+### Windows Requirements
+
+If you want to use **vagrant ssh** you will need git or cygwin.
+
+  * [Git](https://git-scm.com/downloads)
+  * [Cygwin](https://cygwin.com/install.html)
+
+Also, install the rsync package within cygwin, and use vagrant from cygwin.
+
 ## Usage
 
 1. `git clone https://github.com/erudit/vm-dev.git`
@@ -53,11 +62,3 @@ You can shell into the machine with `vagrant ssh`.
 | `vagrant rsync-auto` | Watch defined rsync folders and automatically sync them |
 
 
-## Windows Users
-
-If you want to use **vagrant ssh** you will need git or cygwin.
-
-  * [Git](https://git-scm.com/downloads)
-  * [Cygwin](https://cygwin.com/install.html)
-
-Also, install the rsync package within cygwin.
