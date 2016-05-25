@@ -3,3 +3,10 @@ solr_version: 4.10.3
 solr_home: /usr/share/tomcat/solr
 solr_url: "http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz"
 solr_sha1sum: d35ffc5b90c1d6a8bf2535f3ddab598946d8dd38
+solr_download: /home/vagrant/sync/downloads
+solr_extracted_war: "{{ solr_download }}/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war"
+solr_log4j_jar: "{{ solr_download }}/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar"
+solr_home_src: "{{ solr_download }}/solr-{{ solr_version }}/example/solr"
+solr_contrib_src: "{{ solr_download }}/solr-{{ solr_version }}/contrib"
+solr_dist_src: "{{ solr_download }}/solr-{{ solr_version }}/dist"
+solr_slf4j_src: "{{ solr_download }}/solr-{{ solr_version }}/example/lib/ext"

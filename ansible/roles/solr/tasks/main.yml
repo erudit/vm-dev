@@ -2,18 +2,18 @@
 - name: Downloading SOLR
   get_url:
     url: "{{ solr_url }}"
-    dest: /home/vagrant/sync/downloads/solr-{{ solr_version }}.tgz
+    dest: "{{ solr_download }}/"
     checksum: "sha1:{{ solr_sha1sum }}"
 
 - name: Extracting SOLR
   unarchive:
-    src: /home/vagrant/sync/downloads/solr-{{ solr_version }}.tgz
-    dest: /tmp
-    creates: yes
+    src: "{{ solr_download }}/solr-{{ solr_version }}.tgz"
+    dest: "{{ solr_download }}"
+    creates: "{{ solr_extracted_war }}"
 
 - name: Installing the SOLR webapps
   copy:
-    src: /tmp/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war
+    src: "{{ solr_extracted_war }}"
     dest: "{{ tomcat_home }}/webapps/solr.war"
     owner: tomcat
     group: tomcat
@@ -26,7 +26,7 @@
 
 - name: Copy log4j libs in the Tomcat folder
   copy:
-    src: /tmp/solr-{{ solr_version }}/example/lib/ext/log4j-1.2.17.jar
+    src: "{{ solr_log4j_jar }}"
     dest: "{{ tomcat_home }}/lib/log4j-1.2.17.jar"
 
 - name: stat SOLR folder
@@ -36,36 +36,30 @@
   always_run: true
 
 - name: Installing SOLR
-  command: cp -r /tmp/solr-{{ solr_version }}/example/solr {{ solr_home }}
+  synchronize:
+    src: "{{ item }}"
+    dest: "{{ solr_home }}/"
+  with_items:
+    - "{{ solr_home_src }}/"
+    - "{{ solr_contrib_src }}"
+    - "{{ solr_dist_src }}"
   when: solr_stat.stat.exists == false
+  delegate_to: "{{ inventory_hostname }}"
+  notify: change ownership solr
 
 - name: Copying the schema.xml template
   template:
-    src: /home/vagrant/sync/ansible/roles/solr/templates/schema.xml.j2
+    src: schema.xml.j2
     dest: "{{ solr_home }}/collection1/conf/schema.xml"
-  notify:
-    - change ownership solr
+    owner: tomcat
+    group: tomcat
 
 - name: Copying the solr.xml template
   template:
-    src: /home/vagrant/sync/ansible/roles/solr/templates/solr.xml.j2
+    src: solr.xml.j2
     dest: "{{ tomcat_home }}/conf/Catalina/localhost/solr.xml"
   notify:
     - restart tomcat
-
-- name: Copy contrib folder in solr home
-  copy:
-    src: /tmp/solr-{{ solr_version }}/contrib
-    dest: "{{ solr_home }}/contrib"
-    owner: tomcat
-    group: tomcat
-
-- name: Copy dist folder in solr home
-  copy:
-    src: /tmp/solr-{{ solr_version }}/dist
-    dest: "{{ solr_home }}/dist"
-    owner: tomcat
-    group: tomcat
 
 - meta: flush_handlers
 
@@ -75,7 +69,7 @@
 
 - name: Copy slf4j libs in the Tomcat folder
   copy:
-    src: /tmp/solr-{{ solr_version }}/example/lib/ext/{{ item }}
+    src: "{{ solr_slf4j_src }}/{{ item }}"
     dest: "{{ tomcat_home }}/webapps/solr/WEB-INF/lib/{{ item }}"
   with_items:
     - slf4j-api-1.7.6.jar
