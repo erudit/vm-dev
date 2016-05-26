@@ -1,8 +1,0 @@
----
-- name: change fedora ownership
-  file:
-    path: "{{ fedora_home }}" 
-    owner: tomcat
-    group: tomcat
-    state: directory
-    recurse: yes

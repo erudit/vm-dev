@@ -29,10 +29,7 @@
 - name: Install Fedora-Commons
   command: /usr/bin/java -jar /home/vagrant/sync/downloads/fcrepo-installer-{{ fedora_version }}.jar /tmp/install.properties
   args:
-    creates: "{{ tomcat_home }}/fedora"
-  notify:
-    - change fedora ownership
-    - change tomcat ownership
+    creates: "{{ fedora_home }}"
 
 - name: Wait until the webapps are installed
   wait_for:
@@ -42,7 +39,13 @@
   template:
     src: web.xml.j2
     dest: "{{ tomcat_home }}/webapps/fedora/WEB-INF/web.xml"
+
+- name: change fedora ownership
+  file:
+    path: "{{ fedora_home }}"
+    owner: tomcat
+    group: tomcat
+    state: directory
+    recurse: yes
   notify:
-    - change fedora ownership
-    - change tomcat ownership
     - restart tomcat
