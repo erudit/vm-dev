@@ -1,8 +1,0 @@
----
-- name: change ownership solr
-  file:
-    path: "{{ solr_home }}" 
-    owner: tomcat
-    group: tomcat
-    state: directory
-    recurse: yes

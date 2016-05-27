@@ -45,7 +45,6 @@
     - "{{ solr_dist_src }}"
   when: solr_stat.stat.exists == false
   delegate_to: "{{ inventory_hostname }}"
-  notify: change ownership solr
 
 - name: Copying the schema.xml template
   template:
@@ -75,5 +74,12 @@
     - slf4j-api-1.7.6.jar
     - slf4j-log4j12-1.7.6.jar
   notify:
-    - change ownership solr
     - restart tomcat
+
+- name: change ownership solr
+  file:
+    path: "{{ solr_home }}" 
+    owner: tomcat
+    group: tomcat
+    state: directory
+    recurse: yes
