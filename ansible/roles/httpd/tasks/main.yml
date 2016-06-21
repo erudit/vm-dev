@@ -1,0 +1,27 @@
+---
+- name: install httpd and mod_ssl
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - httpd
+    - mod_ssl
+    - libsemanage-python
+
+- name: set httpd_can_network_connect on
+  seboolean:
+    name: httpd_can_network_connect
+    state: true
+
+- name: add a ProxyPass line in ssl.conf
+  lineinfile:
+    dest: /etc/httpd/conf.d/ssl.conf
+    insertbefore: ^</VirtualHost>
+    line: "ProxyPass / http://{{ tomcat_host }}:8080/"
+  register: httpd_ssl_conf
+
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+  when: httpd_ssl_conf|changed
