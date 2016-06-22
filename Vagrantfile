@@ -42,9 +42,14 @@ Vagrant.configure(2) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
 
-   config.vm.provider "virtualbox" || "libvirt" do |box|
+   config.vm.provider "virtualbox" do |box|
      box.memory = "3072"
      box.cpus = "2"
+   end
+   
+   config.vm.provider "libvirt" do |box|
+     box.memory = 3072
+     box.cpus = 2
    end
 
   # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
