@@ -20,6 +20,13 @@
     line: "ProxyPass / http://{{ tomcat_host }}:8080/"
   register: httpd_ssl_conf
 
+- name: add a ProxyPass line in tomcat.conf 
+  lineinfile:
+    dest: /etc/httpd/conf.d/tomcat.conf
+    line: "ProxyPass / http://{{ tomcat_host }}:8080/"
+    create: true
+  register: httpd_ssl_conf
+
 - name: restart httpd
   service:
     name: httpd
