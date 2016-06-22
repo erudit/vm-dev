@@ -34,3 +34,13 @@
   notify:
     - restart tomcat
     - change tomcat ownership
+
+- name: Configure Tomcat user
+  template:
+    src: tomcat.conf.j2
+    dest: /usr/share/tomcat/conf/tomcat.conf
+    owner: tomcat
+    group: tomcat
+  notify:
+    - restart tomcat
+    - change tomcat ownership
