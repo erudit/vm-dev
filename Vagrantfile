@@ -43,8 +43,8 @@ Vagrant.configure(2) do |config|
   # Example for VirtualBox:
 
    config.vm.provider "virtualbox" do |box|
-     box.memory = "3072"
-     box.cpus = "2"
+     box.memory = 3072
+     box.cpus = 2
    end
    
    config.vm.provider "libvirt" do |box|
