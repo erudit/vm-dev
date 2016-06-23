@@ -43,16 +43,12 @@
     dest: /etc/mysql/my.cnf
     regexp: "^skip-external-locking"
     state: absent
-  notify:
-    - restart mariadb
 
 - name: Modify my.cnf
   lineinfile:
     dest: /etc/mysql/my.cnf
     regexp: "^bind-address"
     state: absent
-  notify:
-    - restart mariadb
 
 #Delete the useless code
 - name: Delete the anonymous sql server user
@@ -73,3 +69,8 @@
 
 #Fedora-Commons configuration
 - include: fedora.yml
+
+- name: restart mariadb
+  service:
+    name: mariadb
+    state: restarted
