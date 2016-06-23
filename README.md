@@ -5,7 +5,7 @@ Development environment with Tomcat (Fedora-Commons & Solr).
 ## Requirements
 
 * [Vagrant](https://www.vagrantup.com/)
-* [VirtualBox](https://www.virtualbox.org/)
+* [VirtualBox](https://www.virtualbox.org/) **or** Libvirt for Linux
 
 ### Windows Requirements
 
