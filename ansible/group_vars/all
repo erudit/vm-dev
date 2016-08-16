@@ -6,4 +6,4 @@ mysql_root_password: root
 #Tomcat configuration
 tomcat_http_port: 8080
 tomcat_https_port: 8443
-tomcat_host: "{{ hostvars[groups['vm-dev'][0]]['ansible_eth1']['ipv4']['address'] }}"
+tomcat_host: localhost

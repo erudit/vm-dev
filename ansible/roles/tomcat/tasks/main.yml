@@ -15,16 +15,6 @@
     state: started
     enabled: yes
 
-- name: Configure Tomcat server
-  template:
-    src: server.xml.j2
-    dest: /usr/share/tomcat/conf/server.xml
-    owner: tomcat
-    group: tomcat
-  notify:
-    - restart tomcat
-    - change tomcat ownership
-
 - name: Configure Tomcat user
   template:
     src: tomcat-users.xml.j2

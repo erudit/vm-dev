@@ -5,7 +5,7 @@ Development environment with Tomcat (Fedora-Commons & Solr).
 ## Requirements
 
 * [Vagrant](https://www.vagrantup.com/)
-* [VirtualBox](https://www.virtualbox.org/) **or** Libvirt for Linux
+* [VirtualBox](https://www.virtualbox.org/) **or** libvirt for Linux
 
 ### Windows Requirements
 
@@ -30,7 +30,7 @@ You can shell into the machine with `vagrant ssh`.
 
 * Once the VM has started, you can use:
   * **Tomcat 7.0.54**
-    * [Tomcat](http://192.168.10.150:8080/)
+    * [Tomcat](http://localhost:8080/)
     * Manager username: admin password: admin
     * Location: /usr/share/tomcat
   * **MariaDB**
@@ -40,12 +40,12 @@ You can shell into the machine with `vagrant ssh`.
       * Username: fedoraAdmin
       * Password: fedoraAdmin
   * **Fedora Commons 3.4.2**
-    * [Fedora](http://192.168.10.150:8080/fedora)
+    * [Fedora](http://localhost:8080/fedora)
     * Username: fedoraAdmin
     * Password: fedoraAdmin
     * Location: /usr/share/tomcat/fedora
   * **Solr 4.10.3**
-    * [Solr](http://192.168.10.150:8080/solr)
+    * [Solr](http://localhost:8080/solr)
     * Location: /usr/share/tomcat/solr
 
 ## Basic Commands

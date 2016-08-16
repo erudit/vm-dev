@@ -22,7 +22,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :shell, path: "scripts/ansible/init.sh", privileged: false, args: '/vagrant'
 
   #Port mapping and forwarding
-  #config.vm.network :forwarded_port, guest: 8080, host: 8181, auto_correct: true
+  config.vm.network :forwarded_port, guest: 8080, host: 8080, auto_correct: true
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-   config.vm.network "private_network", ip: "192.168.10.150"
+  # config.vm.network "private_network", ip: "192.168.10.150"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
