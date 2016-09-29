@@ -62,11 +62,13 @@ https://www.packer.io/
 
 Unzip and copy Packer.exe in vm-dev folder
 Start compilation of the interface
+
 `$ packer.exe build packer.json`
 
 (Several minutes later ...)
 
 Start VM
+
 `$ vagrant up`
 
 If you want to use **vagrant ssh** you will need git or cygwin.
