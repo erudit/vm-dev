@@ -51,21 +51,23 @@ You can use the GUI or you can also shell into the machine with `vagrant ssh`
 Once you have installed Vagrant and VirtualBox (see URLs in Requirements), do as follow
 
 Clone the VM and load the GUI branch
+```
 $ git clone https://github.com/erudit/vm-dev.git
 $ cd vm-dev
 $ git checkout gui
+```
 
 Downloader Packer
 https://www.packer.io/
 
 Unzip and copy Packer.exe in vm-dev folder
 Start compilation of the interface
-$ packer.exe build packer.json
+`$ packer.exe build packer.json`
 
 (Several minutes later ...)
 
 Start VM
-$ vagrant up
+`$ vagrant up`
 
 If you want to use **vagrant ssh** you will need git or cygwin.
 
