@@ -5,6 +5,7 @@ Development environment with Tomcat (Fedora-Commons & Solr).
 ## Requirements
 
 * [Vagrant](https://www.vagrantup.com/)
+ * Version 1.8.6
 * [VirtualBox](https://www.virtualbox.org/) **or** libvirt for Linux
 
 ### Windows Requirements
@@ -60,5 +61,3 @@ You can shell into the machine with `vagrant ssh`.
 | `vagrant destroy`    | Stop the VM and delete all traces                       |
 | `vagrant rsync`      | Sync defined rsync folders                              |
 | `vagrant rsync-auto` | Watch defined rsync folders and automatically sync them |
-
-
